@@ -1,0 +1,7 @@
+LiftSimulator/bin
+LiftSimulator/obj
+*.user
+*.suo
+*.sln.cache
+_ReSharper.*
+Thumbs.db

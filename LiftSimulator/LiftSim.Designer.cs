@@ -1,6 +1,6 @@
 ﻿namespace LiftSimulator
 {
-    partial class Form1
+    partial class frmLiftSim
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // frmLiftSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 539);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(690, 648);
+            this.Name = "frmLiftSim";
+            this.Text = "Lift Simulator";
             this.ResumeLayout(false);
 
         }
