@@ -11,6 +11,10 @@ namespace LiftSimulator
 {
     public partial class frmLiftSim : Form
     {
+        /*********************************************/
+
+        /*********************************************/
+
         public frmLiftSim()
         {
             InitializeComponent();
