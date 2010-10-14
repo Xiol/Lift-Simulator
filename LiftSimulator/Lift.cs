@@ -16,6 +16,7 @@ namespace LiftSimulator
         private int currentFloor;               // Current location of the lift
         private int currentDirection = 0;       // 1 to go down, -1 to go up
         private int destFloor;                  // Destination floor -- TEMPORARY
+        private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
 
         private DispatcherTimer dtMove = new DispatcherTimer();
         /************************************************************************************************/

@@ -22,6 +22,25 @@ namespace LiftSimulator
         LiftController lc = new LiftController();
         /*********************************************/
 
+        public frmLiftSim()
+        {
+            InitializeComponent();
+        }
+
+        private void frmLiftSim_Load(object sender, EventArgs e)
+        {
+            // Create our lift objects, assigning them the image they need to control,
+            // the array of floor locations, and which floors they should 'idle' on.
+            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0]);
+            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1]);
+            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2]);
+
+            // Hand our lifts over to our LiftController object
+            lc.AddLift(lift1);
+            lc.AddLift(lift2);
+            lc.AddLift(lift3);
+        }
+
         public void LiftButtonHandler(object sender, EventArgs e)
         {
             // Each button has a tag associated with it. The tag is two digits - the first specifies
@@ -56,25 +75,6 @@ namespace LiftSimulator
                 default:
                     break;
             }
-        }
-
-        public frmLiftSim()
-        {
-            InitializeComponent();
-        }
-
-        private void frmLiftSim_Load(object sender, EventArgs e)
-        {
-            // Create our lift objects, assigning them the image they need to control,
-            // the array of floor locations, and which floors they should 'idle' on.
-            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0]);
-            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1]);
-            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2]);
-
-            // Hand our lifts over to our LiftController object
-            lc.AddLift(lift1);
-            lc.AddLift(lift2);
-            lc.AddLift(lift3);
         }
     }
 }
