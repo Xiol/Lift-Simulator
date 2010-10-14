@@ -285,8 +285,10 @@
             this.btnL1FG.Name = "btnL1FG";
             this.btnL1FG.Size = new System.Drawing.Size(75, 23);
             this.btnL1FG.TabIndex = 4;
+            this.btnL1FG.Tag = "10";
             this.btnL1FG.Text = "Ground";
             this.btnL1FG.UseVisualStyleBackColor = true;
+            this.btnL1FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F1
             // 
@@ -294,8 +296,10 @@
             this.btnL1F1.Name = "btnL1F1";
             this.btnL1F1.Size = new System.Drawing.Size(75, 23);
             this.btnL1F1.TabIndex = 3;
+            this.btnL1F1.Tag = "11";
             this.btnL1F1.Text = "Floor 1";
             this.btnL1F1.UseVisualStyleBackColor = true;
+            this.btnL1F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F2
             // 
@@ -303,8 +307,10 @@
             this.btnL1F2.Name = "btnL1F2";
             this.btnL1F2.Size = new System.Drawing.Size(75, 23);
             this.btnL1F2.TabIndex = 2;
+            this.btnL1F2.Tag = "12";
             this.btnL1F2.Text = "Floor 2";
             this.btnL1F2.UseVisualStyleBackColor = true;
+            this.btnL1F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F3
             // 
@@ -312,8 +318,10 @@
             this.btnL1F3.Name = "btnL1F3";
             this.btnL1F3.Size = new System.Drawing.Size(75, 23);
             this.btnL1F3.TabIndex = 1;
+            this.btnL1F3.Tag = "13";
             this.btnL1F3.Text = "Floor 3";
             this.btnL1F3.UseVisualStyleBackColor = true;
+            this.btnL1F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F4
             // 
@@ -321,8 +329,10 @@
             this.btnL1F4.Name = "btnL1F4";
             this.btnL1F4.Size = new System.Drawing.Size(75, 23);
             this.btnL1F4.TabIndex = 0;
+            this.btnL1F4.Tag = "14";
             this.btnL1F4.Text = "Floor 4";
             this.btnL1F4.UseVisualStyleBackColor = true;
+            this.btnL1F4.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // gbxLift2Cntr
             // 
@@ -344,8 +354,10 @@
             this.btnL2FG.Name = "btnL2FG";
             this.btnL2FG.Size = new System.Drawing.Size(75, 23);
             this.btnL2FG.TabIndex = 4;
+            this.btnL2FG.Tag = "20";
             this.btnL2FG.Text = "Ground";
             this.btnL2FG.UseVisualStyleBackColor = true;
+            this.btnL2FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F1
             // 
@@ -353,8 +365,10 @@
             this.btnL2F1.Name = "btnL2F1";
             this.btnL2F1.Size = new System.Drawing.Size(75, 23);
             this.btnL2F1.TabIndex = 3;
+            this.btnL2F1.Tag = "21";
             this.btnL2F1.Text = "Floor 1";
             this.btnL2F1.UseVisualStyleBackColor = true;
+            this.btnL2F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F2
             // 
@@ -362,8 +376,10 @@
             this.btnL2F2.Name = "btnL2F2";
             this.btnL2F2.Size = new System.Drawing.Size(75, 23);
             this.btnL2F2.TabIndex = 2;
+            this.btnL2F2.Tag = "22";
             this.btnL2F2.Text = "Floor 2";
             this.btnL2F2.UseVisualStyleBackColor = true;
+            this.btnL2F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F3
             // 
@@ -371,8 +387,10 @@
             this.btnL2F3.Name = "btnL2F3";
             this.btnL2F3.Size = new System.Drawing.Size(75, 23);
             this.btnL2F3.TabIndex = 1;
+            this.btnL2F3.Tag = "23";
             this.btnL2F3.Text = "Floor 3";
             this.btnL2F3.UseVisualStyleBackColor = true;
+            this.btnL2F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F4
             // 
@@ -380,8 +398,10 @@
             this.btnL2F4.Name = "btnL2F4";
             this.btnL2F4.Size = new System.Drawing.Size(75, 23);
             this.btnL2F4.TabIndex = 0;
+            this.btnL2F4.Tag = "24";
             this.btnL2F4.Text = "Floor 4";
             this.btnL2F4.UseVisualStyleBackColor = true;
+            this.btnL2F4.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // gbxLift3Cntr
             // 
@@ -403,8 +423,10 @@
             this.btnL3FG.Name = "btnL3FG";
             this.btnL3FG.Size = new System.Drawing.Size(75, 23);
             this.btnL3FG.TabIndex = 4;
+            this.btnL3FG.Tag = "30";
             this.btnL3FG.Text = "Ground";
             this.btnL3FG.UseVisualStyleBackColor = true;
+            this.btnL3FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F1
             // 
@@ -412,8 +434,10 @@
             this.btnL3F1.Name = "btnL3F1";
             this.btnL3F1.Size = new System.Drawing.Size(75, 23);
             this.btnL3F1.TabIndex = 3;
+            this.btnL3F1.Tag = "31";
             this.btnL3F1.Text = "Floor 1";
             this.btnL3F1.UseVisualStyleBackColor = true;
+            this.btnL3F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F2
             // 
@@ -421,8 +445,10 @@
             this.btnL3F2.Name = "btnL3F2";
             this.btnL3F2.Size = new System.Drawing.Size(75, 23);
             this.btnL3F2.TabIndex = 2;
+            this.btnL3F2.Tag = "32";
             this.btnL3F2.Text = "Floor 2";
             this.btnL3F2.UseVisualStyleBackColor = true;
+            this.btnL3F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F3
             // 
@@ -430,8 +456,10 @@
             this.btnL3F3.Name = "btnL3F3";
             this.btnL3F3.Size = new System.Drawing.Size(75, 23);
             this.btnL3F3.TabIndex = 1;
+            this.btnL3F3.Tag = "33";
             this.btnL3F3.Text = "Floor 3";
             this.btnL3F3.UseVisualStyleBackColor = true;
+            this.btnL3F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F4
             // 
@@ -439,8 +467,10 @@
             this.btnL3F4.Name = "btnL3F4";
             this.btnL3F4.Size = new System.Drawing.Size(75, 23);
             this.btnL3F4.TabIndex = 0;
+            this.btnL3F4.Tag = "34";
             this.btnL3F4.Text = "Floor 4";
             this.btnL3F4.UseVisualStyleBackColor = true;
+            this.btnL3F4.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // frmLiftSim
             // 

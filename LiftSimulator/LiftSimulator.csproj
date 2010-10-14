@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lift.cs" />
+    <Compile Include="LiftController.cs" />
     <Compile Include="LiftSim.cs">
       <SubType>Form</SubType>
     </Compile>

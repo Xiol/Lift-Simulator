@@ -19,8 +19,44 @@ namespace LiftSimulator
         Lift lift2;
         Lift lift3;
 
-
+        LiftController lc = new LiftController();
         /*********************************************/
+
+        public void LiftButtonHandler(object sender, EventArgs e)
+        {
+            // Each button has a tag associated with it. The tag is two digits - the first specifies
+            // the lift the button belongs to, the second is the floor specified. e.g. 23 is lift 2, floor 3.
+            // This handler will handle all the lift buttons without having to write a Click event handler
+            // for each individual button.
+
+            // The sender will be one of the lift buttons, so cast the sender to a Button object.
+            Button buttonSender = (Button)sender;
+
+            // Cast the Tag to a string 
+            string buttonTag = (string)buttonSender.Tag;
+
+            // Get the lift and floor that the sender button is referring to.
+            // Strings are arrays of characters, so we can get the individual characters we need
+            // FIXME: Convert.ToInt32 can parse characters, but returns the decimal ASCII value of those characters
+            // So we need to get the character, convert it to a string, then convert it to an int.
+            int lift = Int32.Parse(buttonTag[0].ToString());
+            int floor = Int32.Parse(buttonTag[1].ToString());
+
+            switch (lift)
+            {
+                case 1:
+                    lift1.Move(floor);
+                    break;
+                case 2:
+                    lift2.Move(floor);
+                    break;
+                case 3:
+                    lift3.Move(floor);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public frmLiftSim()
         {
@@ -35,9 +71,10 @@ namespace LiftSimulator
             lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1]);
             lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2]);
 
-            lift1.Move(4);
-            lift2.Move(3);
-            lift3.Move(2);
+            // Hand our lifts over to our LiftController object
+            lc.AddLift(lift1);
+            lc.AddLift(lift2);
+            lc.AddLift(lift3);
         }
     }
 }
