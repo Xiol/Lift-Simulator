@@ -15,7 +15,7 @@ namespace LiftSimulator
         private int idleFloor;                  // The floor which this lift starts on and returns to when idle
         private int currentFloor;               // Current location of the lift
         private int currentDirection = 0;       // 1 to go down, -1 to go up
-        private int destFloor;                  // Destination floor -- TEMPORARY
+        private int nextDestFloor;              // Next floor the lift is heading to
         private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
 
         private DispatcherTimer dtMove = new DispatcherTimer();
@@ -27,6 +27,7 @@ namespace LiftSimulator
         /// </summary>
         /// <param name="limg">The PictureBox control this Lift object is associated to.</param>
         /// <param name="fy">The list of floor y coordinates</param>
+        /// <param name="sf">The floor the lift will idle/start on</param>
         public Lift(PictureBox limg, int[] fy, int sf)
         {
             liftImage = limg;
@@ -45,13 +46,13 @@ namespace LiftSimulator
             if (currentFloor < floor)
             {
                 currentDirection = -1;
-                destFloor = floor; // TEMPORARY
+                nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
                 currentDirection = 1;
-                destFloor = floor; // TEMPORARY
+                nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
             else
@@ -62,10 +63,10 @@ namespace LiftSimulator
 
         private void dtMove_Tick(object sender, EventArgs e)
         {
-            if (liftImage.Top == floor_y[destFloor])
+            if (liftImage.Top == floor_y[nextDestFloor])
             {
                 // TEMPORARY - CHANGE ME
-                currentFloor = destFloor;
+                currentFloor = nextDestFloor;
                 currentDirection = 0;
                 dtMove.Stop();
             }
@@ -75,9 +76,14 @@ namespace LiftSimulator
             }
         }
 
-        public int GetCurrentFloor()
+        public int GetCurrentFloor
         {
-            return currentFloor;
+            get { return currentFloor; }
+        }
+
+        public int GetCurrentDirection
+        {
+            get { return currentDirection; }
         }
     }
 }
