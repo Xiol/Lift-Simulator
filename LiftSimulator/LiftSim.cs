@@ -19,7 +19,7 @@ namespace LiftSimulator
         Lift lift2;
         Lift lift3;
 
-        LiftController lc = new LiftController();
+        LiftController lc = new LiftController(3);
         /*********************************************/
 
         public frmLiftSim()
@@ -74,6 +74,28 @@ namespace LiftSimulator
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void CallButtonHandler(object sender, EventArgs e)
+        {
+            PictureBox picSender = (PictureBox)sender;
+            string picTag = (string)picSender.Tag;
+
+            int floor = Int32.Parse(picTag[0].ToString());
+            int direction = Int32.Parse(picTag[1].ToString());
+
+            if (direction == 0)
+            {
+                // Going down
+                picSender.Image = Properties.Resources.down_arrow_active;
+                lc.GoingDown(floor);
+            }
+            else
+            {
+                // Going up
+                picSender.Image = Properties.Resources.up_arrow_active;
+                lc.GoingUp(floor);
             }
         }
     }

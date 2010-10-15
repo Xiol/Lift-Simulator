@@ -60,9 +60,37 @@ namespace LiftSimulator.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap down_arrow {
+            get {
+                object obj = ResourceManager.GetObject("down_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap down_arrow_active {
+            get {
+                object obj = ResourceManager.GetObject("down_arrow_active", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap lift {
             get {
                 object obj = ResourceManager.GetObject("lift", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap up_arrow {
+            get {
+                object obj = ResourceManager.GetObject("up_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap up_arrow_active {
+            get {
+                object obj = ResourceManager.GetObject("up_arrow_active", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

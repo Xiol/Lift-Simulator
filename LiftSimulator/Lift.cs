@@ -10,8 +10,8 @@ namespace LiftSimulator
     class Lift
     {
         /************************************************************************************************/
-        private PictureBox liftImage;          // The object we need to control for this lift
-        private int[] floor_y = new int[5];    // The y location of each floor
+        private PictureBox liftImage;           // The object we need to control for this lift
+        private int[] floor_y = new int[5];     // The y location of each floor
         private int idleFloor;                  // The floor which this lift starts on and returns to when idle
         private int currentFloor;               // Current location of the lift
         private int currentDirection = 0;       // 1 to go down, -1 to go up
@@ -73,6 +73,11 @@ namespace LiftSimulator
             {
                 liftImage.Top = liftImage.Top + currentDirection;
             }
+        }
+
+        public int GetCurrentFloor()
+        {
+            return currentFloor;
         }
     }
 }

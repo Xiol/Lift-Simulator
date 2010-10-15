@@ -83,6 +83,18 @@
   <ItemGroup>
     <None Include="imgs\lift.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\down_arrow.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\up_arrow.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\up_arrow_active.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\down_arrow_active.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
