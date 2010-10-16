@@ -85,5 +85,10 @@ namespace LiftSimulator
         {
             get { return currentDirection; }
         }
+
+        public bool IsIdle
+        {
+            get { if (GetCurrentDirection == 0) { return true; } else { return false; } }
+        }
     }
 }

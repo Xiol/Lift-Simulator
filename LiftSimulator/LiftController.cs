@@ -52,6 +52,8 @@ namespace LiftSimulator
         {
             int nl = GetNearestLift(floor);
 
+            // If nl = -1 then there is already a lift on that floor
+            // TODO: Check lift is going in same direction otherwise call new
             if (nl != -1)
             {
                 lifts[nl].Move(floor);
@@ -71,7 +73,22 @@ namespace LiftSimulator
 
                 if (liftPrio == 0) { return -1; }
 
-                if (highestPrio < liftPrio)
+                if (highestPrio == liftPrio)
+                {
+                    // There are two (or more) lifts that are within range.
+                    // Randomly decide which lift we're going to send.
+                    if (randGen.Next(1, 101) <= 50)
+                    {
+                        // Keep current lift.
+                        continue;
+                    }
+                    else
+                    {
+                        // Send this one instead.
+                        liftToSend = i;
+                    }
+                }
+                else if (highestPrio < liftPrio)
                 {
                     highestPrio = liftPrio;
                     liftToSend = i;
