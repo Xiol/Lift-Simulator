@@ -31,9 +31,9 @@ namespace LiftSimulator
         {
             // Create our lift objects, assigning them the image they need to control,
             // the array of floor locations, and which floors they should 'idle' on.
-            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0]);
-            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1]);
-            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2]);
+            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0], this);
+            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1], this);
+            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2], this);
 
             // Hand our lifts over to our LiftController object
             lc.AddLift(lift1);
@@ -85,6 +85,12 @@ namespace LiftSimulator
             int floor = Int32.Parse(picTag[0].ToString());
             int direction = Int32.Parse(picTag[1].ToString());
 
+            // this may need to be changed
+            if (lc.IsLiftOnFloor(floor))
+            {
+                return;
+            }
+
             if (direction == 0)
             {
                 // Going down
@@ -98,6 +104,33 @@ namespace LiftSimulator
                 picSender.Image = Properties.Resources.up_arrow_active;
                 lc.GoingUp(floor);
                 lc.SendLift(floor);
+            }
+        }
+
+        public void ResetCallButton(int floor, int direction)
+        {
+            switch (floor)
+            {
+                case 0:
+                    if (direction == 0) { pbx0Up.Image = Properties.Resources.up_arrow; }
+                    break;
+                case 1:
+                    if (direction == 0) { pbx1Up.Image = Properties.Resources.up_arrow; }
+                    else { pbx1Down.Image = Properties.Resources.down_arrow; }
+                    break;
+                case 2:
+                    if (direction == 0) { pbx2Up.Image = Properties.Resources.up_arrow; }
+                    else { pbx2Down.Image = Properties.Resources.down_arrow; }
+                    break;
+                case 3:
+                    if (direction == 0) { pbx3Up.Image = Properties.Resources.up_arrow; }
+                    else { pbx3Down.Image = Properties.Resources.down_arrow; }
+                    break;
+                case 4:
+                    if (direction == 1) { pbx4Down.Image = Properties.Resources.down_arrow; }
+                    break;
+                default:
+                    break;
             }
         }
     }

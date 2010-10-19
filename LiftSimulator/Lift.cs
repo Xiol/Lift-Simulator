@@ -14,9 +14,11 @@ namespace LiftSimulator
         private int[] floor_y = new int[5];     // The y location of each floor
         private int idleFloor;                  // The floor which this lift starts on and returns to when idle
         private int currentFloor;               // Current location of the lift
-        private int currentDirection = 0;       // 1 to go down, -1 to go up
+        private enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
+        private int currentDirection = (int)Direction.IDLE;
         private int nextDestFloor;              // Next floor the lift is heading to
         private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
+        private frmLiftSim mainForm;            // Our parent form object so we can access methods there
 
         private DispatcherTimer dtMove = new DispatcherTimer();
         /************************************************************************************************/
@@ -28,11 +30,13 @@ namespace LiftSimulator
         /// <param name="limg">The PictureBox control this Lift object is associated to.</param>
         /// <param name="fy">The list of floor y coordinates</param>
         /// <param name="sf">The floor the lift will idle/start on</param>
-        public Lift(PictureBox limg, int[] fy, int sf)
+        /// <param name="mf">The main form (pass in 'this')</param>
+        public Lift(PictureBox limg, int[] fy, int sf, frmLiftSim mf)
         {
             liftImage = limg;
             floor_y = fy;
             idleFloor = sf;
+            mainForm = mf;
 
             liftImage.Top = floor_y[idleFloor];  // Move lift to the start position
             currentFloor = idleFloor;            // Set the lift's current position
@@ -45,13 +49,13 @@ namespace LiftSimulator
         {
             if (currentFloor < floor)
             {
-                currentDirection = -1;
+                currentDirection = (int)Direction.UP;
                 nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
-                currentDirection = 1;
+                currentDirection = (int)Direction.DOWN;
                 nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
@@ -67,11 +71,22 @@ namespace LiftSimulator
             {
                 // TEMPORARY - CHANGE ME
                 currentFloor = nextDestFloor;
-                currentDirection = 0;
+                if (currentDirection == (int)Direction.UP)
+                {
+                    // If we're going up then reset the Up call button for this floor
+                    mainForm.ResetCallButton(currentFloor, 0);
+                }
+                else
+                {
+                    // Else reset the down one
+                    mainForm.ResetCallButton(currentFloor, 1);
+                }
+                currentDirection = (int)Direction.IDLE;
                 dtMove.Stop();
             }
             else
             {
+                // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + currentDirection;
             }
         }

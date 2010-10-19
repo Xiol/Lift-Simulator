@@ -38,6 +38,15 @@ namespace LiftSimulator
             ali++;
         }
 
+        public bool IsLiftOnFloor(int floor)
+        {
+            foreach (Lift lift in lifts)
+            {
+                if (lift.GetCurrentFloor == floor) { return true; }
+            }
+            return false;
+        }
+
         public void GoingUp(int calledFrom)
         {
             upQueueWaiting[calledFrom] = 1;
