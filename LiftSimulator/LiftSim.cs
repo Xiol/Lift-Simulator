@@ -64,21 +64,25 @@ namespace LiftSimulator
             switch (lift)
             {
                 case 1:
-                    lift1.Move(floor);
+                    lift1.AddDest(floor);
                     break;
                 case 2:
-                    lift2.Move(floor);
+                    lift2.AddDest(floor);
                     break;
                 case 3:
-                    lift3.Move(floor);
+                    lift3.AddDest(floor);
                     break;
                 default:
                     break;
             }
+
+            buttonSender.BackColor = Color.DarkRed;
+            buttonSender.ForeColor = Color.White;
         }
 
         public void CallButtonHandler(object sender, EventArgs e)
         {
+            // Works on the same principle that LiftButtonHandler does above.
             PictureBox picSender = (PictureBox)sender;
             string picTag = (string)picSender.Tag;
 

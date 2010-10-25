@@ -14,7 +14,11 @@ namespace LiftSimulator
         // Used for picking a lift if we have a clash
         Random randGen = new Random();
 
-        // This is magic.
+        // This is magic. It represents the priority of each floor when a lift is on
+        // a certain floor. i.e. if the lift is on the bottom floor and a request is
+        // made to send a lift to floor 2 ([0,2]) then this will get a priority of 30, 
+        // whereas the lift on floor 1 ([1,2]) will get a priority of 40, and therefore
+        // is closer and should be sent instead.
         private int[,] liftFlrPrio = new int[5,5] {
             {0,40,30,20,10},
             {40,0,40,30,20},
@@ -80,6 +84,8 @@ namespace LiftSimulator
                 int liftFloor = lifts[i].GetCurrentFloor;
                 int liftPrio = liftFlrPrio[liftFloor, floor];
 
+                // Lift already on the floor
+                // TODO: nextDest of that lift needs to be in the same direction
                 if (liftPrio == 0) { return -1; }
 
                 if (highestPrio == liftPrio)

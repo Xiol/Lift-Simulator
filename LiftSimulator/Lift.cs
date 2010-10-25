@@ -19,8 +19,11 @@ namespace LiftSimulator
         private int nextDestFloor;              // Next floor the lift is heading to
         private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
         private frmLiftSim mainForm;            // Our parent form object so we can access methods there
+        private bool waiting = false;           // set to true before starting wait timer, and spin until it becomes false again
+
 
         private DispatcherTimer dtMove = new DispatcherTimer();
+        private DispatcherTimer dtWait = new DispatcherTimer();
         /************************************************************************************************/
 
 
@@ -43,6 +46,9 @@ namespace LiftSimulator
 
             dtMove.Interval = TimeSpan.FromMilliseconds(25);
             dtMove.Tick += new EventHandler(dtMove_Tick);
+
+            dtWait.Interval = TimeSpan.FromSeconds(3);
+            dtWait.Tick += new EventHandler(dtWait_Tick);
         }
 
         public void Move(int floor)
@@ -65,6 +71,57 @@ namespace LiftSimulator
             }
         }
 
+        public void AddDest(int floor)
+        {
+            destQueue[floor] = 1;
+
+            if (currentDirection == (int)Direction.IDLE)
+            {
+                // if the lift is doing nothing when the floor is added, start moving in that direction
+                // anyway. We need to be careful here of triggering this method when the lift is waiting
+                // at a floor if we're still setting currentDirection to 0 on a wait (don't do this then!)
+                Move(floor);
+            }
+        }
+
+        public bool IsDest(int floor)
+        {
+            if (destQueue[floor] == 1) { return true; } else { return false; }
+        }
+
+        public void MoveNext()
+        {
+            int nextFloor = -1;
+            int counter = 0;
+
+            if (currentDirection == 1) { counter = -1; }
+            else if (currentDirection == -1) { counter = 1; }
+
+            while (nextFloor == -1)
+            {
+                int testFloor = currentFloor + counter;
+                try
+                {
+                    if (destQueue[testFloor] == 1)
+                    {
+                        nextFloor = testFloor;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    // Nothing left in the queue in this direction
+                    currentDirection = (int)Direction.IDLE;
+                    break;
+                }
+                counter++;
+            }
+
+            if (nextFloor != -1)
+            {
+                Move(nextFloor);
+            }
+        }
+
         private void dtMove_Tick(object sender, EventArgs e)
         {
             if (liftImage.Top == floor_y[nextDestFloor])
@@ -81,14 +138,20 @@ namespace LiftSimulator
                     // Else reset the down one
                     mainForm.ResetCallButton(currentFloor, 1);
                 }
-                currentDirection = (int)Direction.IDLE;
                 dtMove.Stop();
+                dtWait.Start();
             }
             else
             {
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + currentDirection;
             }
+        }
+
+        private void dtWait_Tick(object sender, EventArgs e)
+        {
+            dtWait.Stop();
+            MoveNext();
         }
 
         public int GetCurrentFloor
