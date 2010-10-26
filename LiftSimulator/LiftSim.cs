@@ -15,6 +15,8 @@ namespace LiftSimulator
         readonly int[] FLOOR_Y = new int[5] { 344, 259, 173, 87, 3 }; // y axis of floor -> G,1,2,3,4
         readonly int[] IDLE_FLOORS = new int[3] { 0, 2, 4 }; // floors the the lift's idle/start on
 
+        private Button[][] liftButtons = new Button[3][];
+
         Lift lift1;
         Lift lift2;
         Lift lift3;
@@ -31,14 +33,19 @@ namespace LiftSimulator
         {
             // Create our lift objects, assigning them the image they need to control,
             // the array of floor locations, and which floors they should 'idle' on.
-            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0], this);
-            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1], this);
-            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2], this);
+            lift1 = new Lift(pbxLift1, FLOOR_Y, IDLE_FLOORS[0], this, 1);
+            lift2 = new Lift(pbxLift2, FLOOR_Y, IDLE_FLOORS[1], this, 2);
+            lift3 = new Lift(pbxLift3, FLOOR_Y, IDLE_FLOORS[2], this, 3);
 
             // Hand our lifts over to our LiftController object
             lc.AddLift(lift1);
             lc.AddLift(lift2);
             lc.AddLift(lift3);
+
+            // Stick our lift buttons into our array so we can control them easier (well, that's the plan)
+            liftButtons[0] = new Button[5] { btnL1FG, btnL1F1, btnL1F2, btnL1F3, btnL1F4 };
+            liftButtons[1] = new Button[5] { btnL2FG, btnL2F1, btnL2F2, btnL2F3, btnL2F4 };
+            liftButtons[2] = new Button[5] { btnL3FG, btnL3F1, btnL3F2, btnL3F3, btnL3F4 };
         }
 
         public void LiftButtonHandler(object sender, EventArgs e)
@@ -136,6 +143,30 @@ namespace LiftSimulator
                 default:
                     break;
             }
+        }
+
+        public void ResetLiftButton(int floor, int lift)
+        {
+            switch (lift)
+            {
+                case 1:
+                    _ResetLiftButton(liftButtons[0][floor]);
+                    break;
+                case 2:
+                    _ResetLiftButton(liftButtons[1][floor]);
+                    break;
+                case 3:
+                    _ResetLiftButton(liftButtons[2][floor]);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void _ResetLiftButton(Button btn)
+        {
+            btn.ForeColor = Color.Black;
+            btn.BackColor = SystemColors.Control;
         }
     }
 }

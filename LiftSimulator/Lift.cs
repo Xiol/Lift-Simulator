@@ -19,7 +19,7 @@ namespace LiftSimulator
         private int nextDestFloor;              // Next floor the lift is heading to
         private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
         private frmLiftSim mainForm;            // Our parent form object so we can access methods there
-        private bool waiting = false;           // set to true before starting wait timer, and spin until it becomes false again
+        private int liftID;
 
 
         private DispatcherTimer dtMove = new DispatcherTimer();
@@ -34,12 +34,13 @@ namespace LiftSimulator
         /// <param name="fy">The list of floor y coordinates</param>
         /// <param name="sf">The floor the lift will idle/start on</param>
         /// <param name="mf">The main form (pass in 'this')</param>
-        public Lift(PictureBox limg, int[] fy, int sf, frmLiftSim mf)
+        public Lift(PictureBox limg, int[] fy, int sf, frmLiftSim mf, int id)
         {
             liftImage = limg;
             floor_y = fy;
             idleFloor = sf;
             mainForm = mf;
+            liftID = id;
 
             liftImage.Top = floor_y[idleFloor];  // Move lift to the start position
             currentFloor = idleFloor;            // Set the lift's current position
@@ -68,6 +69,7 @@ namespace LiftSimulator
             else
             {
                 currentDirection = Direction.IDLE;
+                destQueue[currentFloor] = 0;
                 return;
             }
         }
@@ -165,6 +167,7 @@ namespace LiftSimulator
                 }
                 dtMove.Stop();
                 destQueue[currentFloor] = 0;
+                mainForm.ResetLiftButton(currentFloor, liftID);
                 dtWait.Start();
             }
             else
