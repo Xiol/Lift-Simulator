@@ -14,8 +14,8 @@ namespace LiftSimulator
         private int[] floor_y = new int[5];     // The y location of each floor
         private int idleFloor;                  // The floor which this lift starts on and returns to when idle
         private int currentFloor;               // Current location of the lift
-        private enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
-        private int currentDirection = (int)Direction.IDLE;
+        public enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
+        private Direction currentDirection = Direction.IDLE;
         private int nextDestFloor;              // Next floor the lift is heading to
         private int[] destQueue = new int[5] { 0, 0, 0, 0, 0 };  // Array of lift buttons that have been pushed
         private frmLiftSim mainForm;            // Our parent form object so we can access methods there
@@ -55,18 +55,19 @@ namespace LiftSimulator
         {
             if (currentFloor < floor)
             {
-                currentDirection = (int)Direction.UP;
+                currentDirection = Direction.UP;
                 nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
-                currentDirection = (int)Direction.DOWN;
+                currentDirection = Direction.DOWN;
                 nextDestFloor = floor; // TEMPORARY
                 dtMove.Start();
             }
             else
             {
+                currentDirection = Direction.IDLE;
                 return;
             }
         }
@@ -75,7 +76,7 @@ namespace LiftSimulator
         {
             destQueue[floor] = 1;
 
-            if (currentDirection == (int)Direction.IDLE)
+            if (currentDirection == Direction.IDLE)
             {
                 // if the lift is doing nothing when the floor is added, start moving in that direction
                 // anyway. We need to be careful here of triggering this method when the lift is waiting
@@ -89,28 +90,53 @@ namespace LiftSimulator
             if (destQueue[floor] == 1) { return true; } else { return false; }
         }
 
+        private bool IsQueued(int startFloor, Direction direction)
+        {
+            // Check to see if there is any floors waiting to be serviced in the direction
+            // specified, from the floor specified.
+            if (direction == Direction.UP)
+            {
+                for (int i = startFloor; i <= 4; i++)
+                {
+                    if (destQueue[i] == 1) { return true; }
+                }
+            }
+            else if (direction == Direction.DOWN)
+            {
+                for (int i = startFloor; i >= 0; i--)
+                {
+                    if (destQueue[i] == 1) { return true; }
+                }
+            }
+            return false;
+        }
+
         public void MoveNext()
         {
             int nextFloor = -1;
             int counter = 0;
+            Direction oppDir = Direction.IDLE;
 
-            if (currentDirection == 1) { counter = -1; }
-            else if (currentDirection == -1) { counter = 1; }
+            if (currentDirection == Direction.DOWN) { counter = -1; oppDir = Direction.UP; }
+            else if (currentDirection == Direction.UP) { counter = 1; oppDir = Direction.DOWN; }
 
             while (nextFloor == -1)
             {
                 int testFloor = currentFloor + counter;
                 try
                 {
-                    if (destQueue[testFloor] == 1)
+                    if (IsDest(testFloor))
                     {
                         nextFloor = testFloor;
+                        break;
                     }
                 }
                 catch (IndexOutOfRangeException)
                 {
                     // Nothing left in the queue in this direction
-                    currentDirection = (int)Direction.IDLE;
+                    // Check to see if we have anything that needs servicing in the opposite direction.
+                    currentDirection = oppDir;
+                    if (IsQueued(currentFloor, oppDir)) { MoveNext(); } else { currentDirection = Direction.IDLE; }
                     break;
                 }
                 counter++;
@@ -126,9 +152,8 @@ namespace LiftSimulator
         {
             if (liftImage.Top == floor_y[nextDestFloor])
             {
-                // TEMPORARY - CHANGE ME
                 currentFloor = nextDestFloor;
-                if (currentDirection == (int)Direction.UP)
+                if (currentDirection == Direction.UP)
                 {
                     // If we're going up then reset the Up call button for this floor
                     mainForm.ResetCallButton(currentFloor, 0);
@@ -139,12 +164,13 @@ namespace LiftSimulator
                     mainForm.ResetCallButton(currentFloor, 1);
                 }
                 dtMove.Stop();
+                destQueue[currentFloor] = 0;
                 dtWait.Start();
             }
             else
             {
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
-                liftImage.Top = liftImage.Top + currentDirection;
+                liftImage.Top = liftImage.Top + (int)currentDirection;
             }
         }
 
@@ -159,7 +185,7 @@ namespace LiftSimulator
             get { return currentFloor; }
         }
 
-        public int GetCurrentDirection
+        public Direction GetCurrentDirection
         {
             get { return currentDirection; }
         }
