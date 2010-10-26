@@ -45,10 +45,10 @@ namespace LiftSimulator
             liftImage.Top = floor_y[idleFloor];  // Move lift to the start position
             currentFloor = idleFloor;            // Set the lift's current position
 
-            dtMove.Interval = TimeSpan.FromMilliseconds(25);
+            dtMove.Interval = TimeSpan.FromMilliseconds(20);
             dtMove.Tick += new EventHandler(dtMove_Tick);
 
-            dtWait.Interval = TimeSpan.FromSeconds(3);
+            dtWait.Interval = TimeSpan.FromSeconds(2);
             dtWait.Tick += new EventHandler(dtWait_Tick);
         }
 
@@ -117,10 +117,11 @@ namespace LiftSimulator
         {
             int nextFloor = -1;
             int counter = 0;
+            int change = 0;
             Direction oppDir = Direction.IDLE;
 
-            if (currentDirection == Direction.DOWN) { counter = -1; oppDir = Direction.UP; }
-            else if (currentDirection == Direction.UP) { counter = 1; oppDir = Direction.DOWN; }
+            if (currentDirection == Direction.DOWN) { counter = -1; change = -1; oppDir = Direction.UP; }
+            else if (currentDirection == Direction.UP) { counter = 1; change = 1; oppDir = Direction.DOWN; }
 
             while (nextFloor == -1)
             {
@@ -141,7 +142,7 @@ namespace LiftSimulator
                     if (IsQueued(currentFloor, oppDir)) { MoveNext(); } else { currentDirection = Direction.IDLE; }
                     break;
                 }
-                counter++;
+                counter = counter + change;
             }
 
             if (nextFloor != -1)

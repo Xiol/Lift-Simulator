@@ -166,7 +166,7 @@ namespace LiftSimulator
         private void _ResetLiftButton(Button btn)
         {
             btn.ForeColor = Color.Black;
-            btn.BackColor = SystemColors.Control;
+            btn.BackColor = Color.Gainsboro;
         }
     }
 }

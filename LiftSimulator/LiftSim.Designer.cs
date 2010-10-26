@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             this.pnlLift1 = new System.Windows.Forms.Panel();
+            this.pbxLift1 = new System.Windows.Forms.PictureBox();
             this.pnlLift2 = new System.Windows.Forms.Panel();
+            this.pbxLift2 = new System.Windows.Forms.PictureBox();
             this.pnlLift3 = new System.Windows.Forms.Panel();
+            this.pbxLift3 = new System.Windows.Forms.PictureBox();
             this.lblDiv1 = new System.Windows.Forms.Label();
             this.lblDiv2 = new System.Windows.Forms.Label();
             this.lblDiv3 = new System.Windows.Forms.Label();
@@ -59,9 +62,6 @@
             this.btnL3F2 = new System.Windows.Forms.Button();
             this.btnL3F3 = new System.Windows.Forms.Button();
             this.btnL3F4 = new System.Windows.Forms.Button();
-            this.pbxLift3 = new System.Windows.Forms.PictureBox();
-            this.pbxLift2 = new System.Windows.Forms.PictureBox();
-            this.pbxLift1 = new System.Windows.Forms.PictureBox();
             this.pbx4Down = new System.Windows.Forms.PictureBox();
             this.pbx3Down = new System.Windows.Forms.PictureBox();
             this.pbx3Up = new System.Windows.Forms.PictureBox();
@@ -71,14 +71,14 @@
             this.pbx1Up = new System.Windows.Forms.PictureBox();
             this.pbx0Up = new System.Windows.Forms.PictureBox();
             this.pnlLift1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).BeginInit();
             this.pnlLift2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift2)).BeginInit();
             this.pnlLift3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift3)).BeginInit();
             this.gbxLift1Cntr.SuspendLayout();
             this.gbxLift2Cntr.SuspendLayout();
             this.gbxLift3Cntr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx4Down)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Down)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Up)).BeginInit();
@@ -98,6 +98,16 @@
             this.pnlLift1.Size = new System.Drawing.Size(85, 424);
             this.pnlLift1.TabIndex = 2;
             // 
+            // pbxLift1
+            // 
+            this.pbxLift1.Image = global::LiftSimulator.Properties.Resources.lift;
+            this.pbxLift1.Location = new System.Drawing.Point(5, 344);
+            this.pbxLift1.Name = "pbxLift1";
+            this.pbxLift1.Size = new System.Drawing.Size(75, 77);
+            this.pbxLift1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxLift1.TabIndex = 0;
+            this.pbxLift1.TabStop = false;
+            // 
             // pnlLift2
             // 
             this.pnlLift2.BackColor = System.Drawing.Color.Silver;
@@ -107,6 +117,16 @@
             this.pnlLift2.Size = new System.Drawing.Size(85, 424);
             this.pnlLift2.TabIndex = 3;
             // 
+            // pbxLift2
+            // 
+            this.pbxLift2.Image = global::LiftSimulator.Properties.Resources.lift;
+            this.pbxLift2.Location = new System.Drawing.Point(5, 344);
+            this.pbxLift2.Name = "pbxLift2";
+            this.pbxLift2.Size = new System.Drawing.Size(75, 77);
+            this.pbxLift2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxLift2.TabIndex = 0;
+            this.pbxLift2.TabStop = false;
+            // 
             // pnlLift3
             // 
             this.pnlLift3.BackColor = System.Drawing.Color.Silver;
@@ -115,6 +135,16 @@
             this.pnlLift3.Name = "pnlLift3";
             this.pnlLift3.Size = new System.Drawing.Size(85, 424);
             this.pnlLift3.TabIndex = 3;
+            // 
+            // pbxLift3
+            // 
+            this.pbxLift3.Image = global::LiftSimulator.Properties.Resources.lift;
+            this.pbxLift3.Location = new System.Drawing.Point(5, 344);
+            this.pbxLift3.Name = "pbxLift3";
+            this.pbxLift3.Size = new System.Drawing.Size(75, 77);
+            this.pbxLift3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxLift3.TabIndex = 0;
+            this.pbxLift3.TabStop = false;
             // 
             // lblDiv1
             // 
@@ -217,57 +247,62 @@
             // 
             // btnL1FG
             // 
+            this.btnL1FG.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL1FG.Location = new System.Drawing.Point(5, 135);
             this.btnL1FG.Name = "btnL1FG";
             this.btnL1FG.Size = new System.Drawing.Size(75, 23);
             this.btnL1FG.TabIndex = 4;
             this.btnL1FG.Tag = "10";
             this.btnL1FG.Text = "Ground";
-            this.btnL1FG.UseVisualStyleBackColor = true;
+            this.btnL1FG.UseVisualStyleBackColor = false;
             this.btnL1FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F1
             // 
+            this.btnL1F1.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL1F1.Location = new System.Drawing.Point(5, 106);
             this.btnL1F1.Name = "btnL1F1";
             this.btnL1F1.Size = new System.Drawing.Size(75, 23);
             this.btnL1F1.TabIndex = 3;
             this.btnL1F1.Tag = "11";
             this.btnL1F1.Text = "Floor 1";
-            this.btnL1F1.UseVisualStyleBackColor = true;
+            this.btnL1F1.UseVisualStyleBackColor = false;
             this.btnL1F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F2
             // 
+            this.btnL1F2.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL1F2.Location = new System.Drawing.Point(5, 77);
             this.btnL1F2.Name = "btnL1F2";
             this.btnL1F2.Size = new System.Drawing.Size(75, 23);
             this.btnL1F2.TabIndex = 2;
             this.btnL1F2.Tag = "12";
             this.btnL1F2.Text = "Floor 2";
-            this.btnL1F2.UseVisualStyleBackColor = true;
+            this.btnL1F2.UseVisualStyleBackColor = false;
             this.btnL1F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F3
             // 
+            this.btnL1F3.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL1F3.Location = new System.Drawing.Point(5, 48);
             this.btnL1F3.Name = "btnL1F3";
             this.btnL1F3.Size = new System.Drawing.Size(75, 23);
             this.btnL1F3.TabIndex = 1;
             this.btnL1F3.Tag = "13";
             this.btnL1F3.Text = "Floor 3";
-            this.btnL1F3.UseVisualStyleBackColor = true;
+            this.btnL1F3.UseVisualStyleBackColor = false;
             this.btnL1F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL1F4
             // 
+            this.btnL1F4.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL1F4.Location = new System.Drawing.Point(5, 19);
             this.btnL1F4.Name = "btnL1F4";
             this.btnL1F4.Size = new System.Drawing.Size(75, 23);
             this.btnL1F4.TabIndex = 0;
             this.btnL1F4.Tag = "14";
             this.btnL1F4.Text = "Floor 4";
-            this.btnL1F4.UseVisualStyleBackColor = true;
+            this.btnL1F4.UseVisualStyleBackColor = false;
             this.btnL1F4.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // gbxLift2Cntr
@@ -286,57 +321,62 @@
             // 
             // btnL2FG
             // 
+            this.btnL2FG.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL2FG.Location = new System.Drawing.Point(5, 135);
             this.btnL2FG.Name = "btnL2FG";
             this.btnL2FG.Size = new System.Drawing.Size(75, 23);
             this.btnL2FG.TabIndex = 4;
             this.btnL2FG.Tag = "20";
             this.btnL2FG.Text = "Ground";
-            this.btnL2FG.UseVisualStyleBackColor = true;
+            this.btnL2FG.UseVisualStyleBackColor = false;
             this.btnL2FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F1
             // 
+            this.btnL2F1.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL2F1.Location = new System.Drawing.Point(5, 106);
             this.btnL2F1.Name = "btnL2F1";
             this.btnL2F1.Size = new System.Drawing.Size(75, 23);
             this.btnL2F1.TabIndex = 3;
             this.btnL2F1.Tag = "21";
             this.btnL2F1.Text = "Floor 1";
-            this.btnL2F1.UseVisualStyleBackColor = true;
+            this.btnL2F1.UseVisualStyleBackColor = false;
             this.btnL2F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F2
             // 
+            this.btnL2F2.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL2F2.Location = new System.Drawing.Point(5, 77);
             this.btnL2F2.Name = "btnL2F2";
             this.btnL2F2.Size = new System.Drawing.Size(75, 23);
             this.btnL2F2.TabIndex = 2;
             this.btnL2F2.Tag = "22";
             this.btnL2F2.Text = "Floor 2";
-            this.btnL2F2.UseVisualStyleBackColor = true;
+            this.btnL2F2.UseVisualStyleBackColor = false;
             this.btnL2F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F3
             // 
+            this.btnL2F3.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL2F3.Location = new System.Drawing.Point(5, 48);
             this.btnL2F3.Name = "btnL2F3";
             this.btnL2F3.Size = new System.Drawing.Size(75, 23);
             this.btnL2F3.TabIndex = 1;
             this.btnL2F3.Tag = "23";
             this.btnL2F3.Text = "Floor 3";
-            this.btnL2F3.UseVisualStyleBackColor = true;
+            this.btnL2F3.UseVisualStyleBackColor = false;
             this.btnL2F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL2F4
             // 
+            this.btnL2F4.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL2F4.Location = new System.Drawing.Point(5, 19);
             this.btnL2F4.Name = "btnL2F4";
             this.btnL2F4.Size = new System.Drawing.Size(75, 23);
             this.btnL2F4.TabIndex = 0;
             this.btnL2F4.Tag = "24";
             this.btnL2F4.Text = "Floor 4";
-            this.btnL2F4.UseVisualStyleBackColor = true;
+            this.btnL2F4.UseVisualStyleBackColor = false;
             this.btnL2F4.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // gbxLift3Cntr
@@ -355,88 +395,63 @@
             // 
             // btnL3FG
             // 
+            this.btnL3FG.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL3FG.Location = new System.Drawing.Point(5, 135);
             this.btnL3FG.Name = "btnL3FG";
             this.btnL3FG.Size = new System.Drawing.Size(75, 23);
             this.btnL3FG.TabIndex = 4;
             this.btnL3FG.Tag = "30";
             this.btnL3FG.Text = "Ground";
-            this.btnL3FG.UseVisualStyleBackColor = true;
+            this.btnL3FG.UseVisualStyleBackColor = false;
             this.btnL3FG.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F1
             // 
+            this.btnL3F1.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL3F1.Location = new System.Drawing.Point(5, 106);
             this.btnL3F1.Name = "btnL3F1";
             this.btnL3F1.Size = new System.Drawing.Size(75, 23);
             this.btnL3F1.TabIndex = 3;
             this.btnL3F1.Tag = "31";
             this.btnL3F1.Text = "Floor 1";
-            this.btnL3F1.UseVisualStyleBackColor = true;
+            this.btnL3F1.UseVisualStyleBackColor = false;
             this.btnL3F1.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F2
             // 
+            this.btnL3F2.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL3F2.Location = new System.Drawing.Point(5, 77);
             this.btnL3F2.Name = "btnL3F2";
             this.btnL3F2.Size = new System.Drawing.Size(75, 23);
             this.btnL3F2.TabIndex = 2;
             this.btnL3F2.Tag = "32";
             this.btnL3F2.Text = "Floor 2";
-            this.btnL3F2.UseVisualStyleBackColor = true;
+            this.btnL3F2.UseVisualStyleBackColor = false;
             this.btnL3F2.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F3
             // 
+            this.btnL3F3.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL3F3.Location = new System.Drawing.Point(5, 48);
             this.btnL3F3.Name = "btnL3F3";
             this.btnL3F3.Size = new System.Drawing.Size(75, 23);
             this.btnL3F3.TabIndex = 1;
             this.btnL3F3.Tag = "33";
             this.btnL3F3.Text = "Floor 3";
-            this.btnL3F3.UseVisualStyleBackColor = true;
+            this.btnL3F3.UseVisualStyleBackColor = false;
             this.btnL3F3.Click += new System.EventHandler(this.LiftButtonHandler);
             // 
             // btnL3F4
             // 
+            this.btnL3F4.BackColor = System.Drawing.Color.Gainsboro;
             this.btnL3F4.Location = new System.Drawing.Point(5, 19);
             this.btnL3F4.Name = "btnL3F4";
             this.btnL3F4.Size = new System.Drawing.Size(75, 23);
             this.btnL3F4.TabIndex = 0;
             this.btnL3F4.Tag = "34";
             this.btnL3F4.Text = "Floor 4";
-            this.btnL3F4.UseVisualStyleBackColor = true;
+            this.btnL3F4.UseVisualStyleBackColor = false;
             this.btnL3F4.Click += new System.EventHandler(this.LiftButtonHandler);
-            // 
-            // pbxLift3
-            // 
-            this.pbxLift3.Image = global::LiftSimulator.Properties.Resources.lift;
-            this.pbxLift3.Location = new System.Drawing.Point(5, 344);
-            this.pbxLift3.Name = "pbxLift3";
-            this.pbxLift3.Size = new System.Drawing.Size(75, 77);
-            this.pbxLift3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxLift3.TabIndex = 0;
-            this.pbxLift3.TabStop = false;
-            // 
-            // pbxLift2
-            // 
-            this.pbxLift2.Image = global::LiftSimulator.Properties.Resources.lift;
-            this.pbxLift2.Location = new System.Drawing.Point(5, 344);
-            this.pbxLift2.Name = "pbxLift2";
-            this.pbxLift2.Size = new System.Drawing.Size(75, 77);
-            this.pbxLift2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxLift2.TabIndex = 0;
-            this.pbxLift2.TabStop = false;
-            // 
-            // pbxLift1
-            // 
-            this.pbxLift1.Image = global::LiftSimulator.Properties.Resources.lift;
-            this.pbxLift1.Location = new System.Drawing.Point(5, 344);
-            this.pbxLift1.Name = "pbxLift1";
-            this.pbxLift1.Size = new System.Drawing.Size(75, 77);
-            this.pbxLift1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxLift1.TabIndex = 0;
-            this.pbxLift1.TabStop = false;
             // 
             // pbx4Down
             // 
@@ -569,14 +584,14 @@
             this.Text = "Lift Simulator";
             this.Load += new System.EventHandler(this.frmLiftSim_Load);
             this.pnlLift1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).EndInit();
             this.pnlLift2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift2)).EndInit();
             this.pnlLift3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLift3)).EndInit();
             this.gbxLift1Cntr.ResumeLayout(false);
             this.gbxLift2Cntr.ResumeLayout(false);
             this.gbxLift3Cntr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx4Down)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Down)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Up)).EndInit();
