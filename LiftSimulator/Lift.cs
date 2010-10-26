@@ -78,13 +78,7 @@ namespace LiftSimulator
         {
             destQueue[floor] = 1;
 
-            if (currentDirection == Direction.IDLE)
-            {
-                // if the lift is doing nothing when the floor is added, start moving in that direction
-                // anyway. We need to be careful here of triggering this method when the lift is waiting
-                // at a floor if we're still setting currentDirection to 0 on a wait (don't do this then!)
-                Move(floor);
-            }
+            MoveNext();
         }
 
         public bool IsDest(int floor)
@@ -120,8 +114,15 @@ namespace LiftSimulator
             int change = 0;
             Direction oppDir = Direction.IDLE;
 
-            if (currentDirection == Direction.DOWN) { counter = -1; change = -1; oppDir = Direction.UP; }
-            else if (currentDirection == Direction.UP) { counter = 1; change = 1; oppDir = Direction.DOWN; }
+            // If we're idle, start scanning up anyway.
+            if (currentDirection == Direction.DOWN) 
+            {
+                counter = -1; change = -1; oppDir = Direction.UP; 
+            }
+            else if (currentDirection == Direction.UP || currentDirection == Direction.IDLE) 
+            {
+                counter = 1; change = 1; oppDir = Direction.DOWN; 
+            }
 
             while (nextFloor == -1)
             {
