@@ -68,23 +68,28 @@ namespace LiftSimulator
             int lift = Int32.Parse(buttonTag[0].ToString());
             int floor = Int32.Parse(buttonTag[1].ToString());
 
+            bool destOK = false;
+
             switch (lift)
             {
                 case 1:
-                    lift1.AddDest(floor);
+                    if (lift1.GetCurrentFloor != floor) { lift1.AddDest(floor); destOK = true; }
                     break;
                 case 2:
-                    lift2.AddDest(floor);
+                    if (lift2.GetCurrentFloor != floor) { lift2.AddDest(floor); destOK = true; }
                     break;
                 case 3:
-                    lift3.AddDest(floor);
+                    if (lift3.GetCurrentFloor != floor) { lift3.AddDest(floor); destOK = true; }
                     break;
                 default:
                     break;
             }
 
-            buttonSender.BackColor = Color.DarkRed;
-            buttonSender.ForeColor = Color.White;
+            if (destOK)
+            {
+                buttonSender.BackColor = Color.DarkRed;
+                buttonSender.ForeColor = Color.White;
+            }
         }
 
         public void CallButtonHandler(object sender, EventArgs e)

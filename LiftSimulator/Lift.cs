@@ -58,12 +58,14 @@ namespace LiftSimulator
             {
                 currentDirection = Direction.UP;
                 nextDestFloor = floor; // TEMPORARY
+                //currentFloor = -1;
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
                 currentDirection = Direction.DOWN;
                 nextDestFloor = floor; // TEMPORARY
+                //currentFloor = -1;
                 dtMove.Start();
             }
             else
@@ -77,7 +79,6 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
-
             MoveNext();
         }
 
