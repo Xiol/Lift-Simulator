@@ -79,7 +79,11 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
-            MoveNext();
+            //if (currentDirection == Direction.IDLE)
+            //{
+                // If we're idle then start things off, otherwise just add to queue and return
+                MoveNext();
+            //}
         }
 
         public bool IsDest(int floor)
@@ -175,6 +179,9 @@ namespace LiftSimulator
             }
             else
             {
+                // TODO: We need to check if another floor has been added to the queue and if so
+                // set it as the nextdestfloor if it's between us and our current destination
+
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + (int)currentDirection;
             }

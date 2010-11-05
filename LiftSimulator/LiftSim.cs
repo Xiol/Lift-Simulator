@@ -16,6 +16,7 @@ namespace LiftSimulator
         readonly int[] IDLE_FLOORS = new int[3] { 0, 2, 4 }; // floors the the lift's idle/start on
 
         private Button[][] liftButtons = new Button[3][];
+        private PictureBox[][] callButtons = new PictureBox[5][];
 
         Lift lift1;
         Lift lift2;
@@ -46,6 +47,13 @@ namespace LiftSimulator
             liftButtons[0] = new Button[5] { btnL1FG, btnL1F1, btnL1F2, btnL1F3, btnL1F4 };
             liftButtons[1] = new Button[5] { btnL2FG, btnL2F1, btnL2F2, btnL2F3, btnL2F4 };
             liftButtons[2] = new Button[5] { btnL3FG, btnL3F1, btnL3F2, btnL3F3, btnL3F4 };
+
+            // Same thing for our call 'buttons'
+            callButtons[0] = new PictureBox[2] { null, pbx0Up };
+            callButtons[1] = new PictureBox[2] { pbx1Down, pbx1Up };
+            callButtons[2] = new PictureBox[2] { pbx2Down, pbx2Up };
+            callButtons[3] = new PictureBox[2] { pbx3Down, pbx3Up };
+            callButtons[4] = new PictureBox[2] { pbx4Down, null };
         }
 
         public void LiftButtonHandler(object sender, EventArgs e)
@@ -148,6 +156,16 @@ namespace LiftSimulator
                 default:
                     break;
             }
+        }
+
+        private void ResetUpCallButton(PictureBox pbx)
+        {
+            pbx.Image = Properties.Resources.up_arrow;
+        }
+
+        private void ResetDownCallButton(PictureBox pbx)
+        {
+            pbx.Image = Properties.Resources.down_arrow;
         }
 
         public void ResetLiftButton(int floor, int lift)
