@@ -7,6 +7,7 @@ namespace LiftSimulator
 {
     class LiftController
     {
+        public enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
         // List of lifts we control
         private Lift[] lifts;
         // Index for adding items to the lifts array
@@ -51,6 +52,16 @@ namespace LiftSimulator
             return false;
         }
 
+        public bool LiftHasDest(int floor)
+        {
+            foreach (Lift lift in lifts)
+            {
+                if (lift.IsDest(floor)) { return true; }
+            }
+
+            return false;
+        }
+
         public void GoingUp(int calledFrom)
         {
             upQueueWaiting[calledFrom] = 1;
@@ -61,19 +72,18 @@ namespace LiftSimulator
             downQueueWaiting[calledFrom] = 1;
         }
 
-        public void SendLift(int floor)
+        public void SendLift(int floor, int dir)
         {
-            int nl = GetNearestLift(floor);
+            int nl = GetNearestLift(floor, dir);
 
             // If nl = -1 then there is already a lift on that floor
-            // TODO: Check lift is going in same direction otherwise call new
             if (nl != -1)
             {
-                lifts[nl].Move(floor);
+                lifts[nl].AddDest(floor);
             }
         }
 
-        private int GetNearestLift(int floor)
+        private int GetNearestLift(int floor, int trav)
         {
             // TODO: Check direction lift is already travelling
             int liftToSend = -1;
@@ -81,32 +91,35 @@ namespace LiftSimulator
 
             for (int i = 0; i < lifts.Count(); i++)
             {
-                int liftFloor = lifts[i].GetCurrentFloor;
-                int liftPrio = liftFlrPrio[liftFloor, floor];
-
-                // Lift already on the floor
-                // TODO: nextDest of that lift needs to be in the same direction
-                if (liftPrio == 0) { return -1; }
-
-                if (highestPrio == liftPrio)
+                if (lifts[i].IsTravelling(trav) && !LiftHasDest(floor))
                 {
-                    // There are two (or more) lifts that are within range.
-                    // Randomly decide which lift we're going to send.
-                    if (randGen.Next(1, 101) <= 50)
+                    int liftFloor = lifts[i].GetCurrentFloor;
+                    int liftPrio = liftFlrPrio[liftFloor, floor];
+
+                    // Lift already on the floor
+                    // TODO: nextDest of that lift needs to be in the same direction
+                    if (liftPrio == 0) { return -1; }
+
+                    if (highestPrio == liftPrio)
                     {
-                        // Keep current lift.
-                        continue;
+                        // There are two (or more) lifts that are within range.
+                        // Randomly decide which lift we're going to send.
+                        if (randGen.Next(1, 101) <= 50)
+                        {
+                            // Keep current lift.
+                            continue;
+                        }
+                        else
+                        {
+                            // Send this one instead.
+                            liftToSend = i;
+                        }
                     }
-                    else
+                    else if (highestPrio < liftPrio)
                     {
-                        // Send this one instead.
+                        highestPrio = liftPrio;
                         liftToSend = i;
                     }
-                }
-                else if (highestPrio < liftPrio)
-                {
-                    highestPrio = liftPrio;
-                    liftToSend = i;
                 }
             }
 

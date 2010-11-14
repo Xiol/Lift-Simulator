@@ -207,5 +207,12 @@ namespace LiftSimulator
         {
             get { if (GetCurrentDirection == 0) { return true; } else { return false; } }
         }
+
+        public bool IsTravelling(int dir)
+        {
+            if (GetCurrentDirection == (Direction)dir) { return true; }
+            else if (IsIdle) { return true; }
+            else { return false; } 
+        }
     }
 }

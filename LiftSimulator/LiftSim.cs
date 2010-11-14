@@ -120,14 +120,14 @@ namespace LiftSimulator
                 // Going down
                 picSender.Image = Properties.Resources.down_arrow_active;
                 lc.GoingDown(floor);
-                lc.SendLift(floor);
+                lc.SendLift(floor, 1);
             }
             else
             {
                 // Going up
                 picSender.Image = Properties.Resources.up_arrow_active;
                 lc.GoingUp(floor);
-                lc.SendLift(floor);
+                lc.SendLift(floor, -1);
             }
         }
 
