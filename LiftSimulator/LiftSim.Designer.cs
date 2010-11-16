@@ -70,6 +70,7 @@
             this.pbx1Down = new System.Windows.Forms.PictureBox();
             this.pbx1Up = new System.Windows.Forms.PictureBox();
             this.pbx0Up = new System.Windows.Forms.PictureBox();
+            this.tbxLog = new System.Windows.Forms.TextBox();
             this.pnlLift1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).BeginInit();
             this.pnlLift2.SuspendLayout();
@@ -549,11 +550,21 @@
             this.pbx0Up.Tag = "01";
             this.pbx0Up.Click += new System.EventHandler(this.CallButtonHandler);
             // 
+            // tbxLog
+            // 
+            this.tbxLog.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxLog.Location = new System.Drawing.Point(10, 13);
+            this.tbxLog.Multiline = true;
+            this.tbxLog.Name = "tbxLog";
+            this.tbxLog.Size = new System.Drawing.Size(213, 181);
+            this.tbxLog.TabIndex = 30;
+            // 
             // frmLiftSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 648);
+            this.Controls.Add(this.tbxLog);
             this.Controls.Add(this.pbx0Up);
             this.Controls.Add(this.pbx1Down);
             this.Controls.Add(this.pbx1Up);
@@ -649,6 +660,7 @@
         private System.Windows.Forms.PictureBox pbx1Down;
         private System.Windows.Forms.PictureBox pbx1Up;
         private System.Windows.Forms.PictureBox pbx0Up;
+        private System.Windows.Forms.TextBox tbxLog;
     }
 }
 

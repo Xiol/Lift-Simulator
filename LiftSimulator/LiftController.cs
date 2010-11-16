@@ -113,7 +113,7 @@ namespace LiftSimulator
                         {
                             // Send this one instead.
                             liftToSend = i;
-                        }
+                         }
                     }
                     else if (highestPrio < liftPrio)
                     {

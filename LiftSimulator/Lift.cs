@@ -84,6 +84,7 @@ namespace LiftSimulator
                 // If we're idle then start things off, otherwise just add to queue and return
                 MoveNext();
             //}
+                mainForm.AddToLog("Lift " + liftID + " destination added " + floor.ToString());
         }
 
         public bool IsDest(int floor)
@@ -114,6 +115,8 @@ namespace LiftSimulator
 
         public void MoveNext()
         {
+            if (dtMove.IsEnabled) { return; }
+
             int nextFloor = -1;
             int counter = 0;
             int change = 0;
@@ -145,7 +148,12 @@ namespace LiftSimulator
                     // Nothing left in the queue in this direction
                     // Check to see if we have anything that needs servicing in the opposite direction.
                     currentDirection = oppDir;
-                    if (IsQueued(currentFloor, oppDir)) { MoveNext(); } else { currentDirection = Direction.IDLE; }
+                    if (IsQueued(currentFloor, oppDir)) { 
+                        MoveNext(); 
+                    } else { 
+                        currentDirection = Direction.IDLE;
+                        mainForm.AddToLog("Lift " + liftID + " going idle.");
+                    }
                     break;
                 }
                 counter = counter + change;
@@ -153,6 +161,7 @@ namespace LiftSimulator
 
             if (nextFloor != -1)
             {
+                mainForm.AddToLog("Lift " + liftID + " moving to " + nextFloor);
                 Move(nextFloor);
             }
         }
@@ -177,6 +186,21 @@ namespace LiftSimulator
                 mainForm.ResetLiftButton(currentFloor, liftID);
                 dtWait.Start();
             }
+            //else if (liftImage.Top > floor_y[0])
+            //{
+            //    // stop the lifts from disappearing... :/
+            //    liftImage.Top = floor_y[0];
+            //    dtMove.Stop();
+            //    destQueue[0] = 0;
+            //    dtWait.Start();
+            //}
+            //else if (liftImage.Top < floor_y[4])
+            //{
+            //    liftImage.Top = floor_y[4];
+            //    dtMove.Stop();
+            //    destQueue[4] = 0;
+            //    dtWait.Start();
+            //}
             else
             {
                 // TODO: We need to check if another floor has been added to the queue and if so

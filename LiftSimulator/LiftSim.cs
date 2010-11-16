@@ -118,14 +118,14 @@ namespace LiftSimulator
             if (direction == 0)
             {
                 // Going down
-                picSender.Image = Properties.Resources.down_arrow_active;
+               // picSender.Image = Properties.Resources.down_arrow_active;
                 lc.GoingDown(floor);
                 lc.SendLift(floor, 1);
             }
             else
             {
                 // Going up
-                picSender.Image = Properties.Resources.up_arrow_active;
+              //  picSender.Image = Properties.Resources.up_arrow_active;
                 lc.GoingUp(floor);
                 lc.SendLift(floor, -1);
             }
@@ -190,6 +190,11 @@ namespace LiftSimulator
         {
             btn.ForeColor = Color.Black;
             btn.BackColor = Color.Gainsboro;
+        }
+
+        public void AddToLog(string text)
+        {
+            tbxLog.AppendText(text + "\r\n");
         }
     }
 }
