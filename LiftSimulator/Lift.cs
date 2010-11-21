@@ -45,6 +45,8 @@ namespace LiftSimulator
             liftImage.Top = floor_y[idleFloor];  // Move lift to the start position
             currentFloor = idleFloor;            // Set the lift's current position
 
+            mainForm.AddToLog("Lift " + liftID + " initialised. Start floor: " + currentFloor);
+
             dtMove.Interval = TimeSpan.FromMilliseconds(20);
             dtMove.Tick += new EventHandler(dtMove_Tick);
 
@@ -57,14 +59,14 @@ namespace LiftSimulator
             if (currentFloor < floor)
             {
                 currentDirection = Direction.UP;
-                nextDestFloor = floor; // TEMPORARY
+                //nextDestFloor = floor; // TEMPORARY
                 //currentFloor = -1;
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
                 currentDirection = Direction.DOWN;
-                nextDestFloor = floor; // TEMPORARY
+                //nextDestFloor = floor; // TEMPORARY
                 //currentFloor = -1;
                 dtMove.Start();
             }
@@ -79,8 +81,8 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
+            mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());
             MoveNext();
-            mainForm.AddToLog("Lift " + liftID + " destination added " + floor.ToString());
         }
 
         public bool IsDest(int floor)
@@ -111,20 +113,20 @@ namespace LiftSimulator
 
         public void MoveNext()
         {
-            if (dtMove.IsEnabled) { return; }
+            //if (dtMove.IsEnabled) { return; }
 
             int nextFloor = -1;
             int counter = 0;
             int change = 0;
             Direction oppDir = Direction.IDLE;
 
-            // If we're idle, start scanning up anyway.
             if (currentDirection == Direction.DOWN) 
             {
                 counter = -1; change = -1; oppDir = Direction.UP; 
             }
             else if (currentDirection == Direction.UP || currentDirection == Direction.IDLE) 
             {
+                // If we're idle, start scanning up anyway.
                 counter = 1; change = 1; oppDir = Direction.DOWN; 
             }
 
@@ -135,8 +137,21 @@ namespace LiftSimulator
                 {
                     if (IsDest(testFloor))
                     {
-                        nextFloor = testFloor;
-                        break;
+                        // Sanity check to make sure we've not moved past the floor already
+                        // This stops the lifts from disappearing... in theory.
+                        if (currentDirection == Direction.UP)
+                        {
+                            if (!(liftImage.Top < floor_y[testFloor])) { nextFloor = testFloor; break; }
+                        }
+                        else if (currentDirection == Direction.DOWN)
+                        {
+                            if (!(liftImage.Top > floor_y[testFloor])) { nextFloor = testFloor; break; }
+                        }
+                        else if (currentDirection == Direction.IDLE)
+                        {
+                            nextFloor = testFloor;
+                            break;
+                        }
                     }
                 }
                 catch (IndexOutOfRangeException)
@@ -144,12 +159,12 @@ namespace LiftSimulator
                     // Nothing left in the queue in this direction
                     // Check to see if we have anything that needs servicing in the opposite direction.
                     currentDirection = oppDir;
-                    if (IsQueued(currentFloor, oppDir)) 
-                    { 
-                        MoveNext(); 
+                    if (IsQueued(currentFloor, oppDir))
+                    {
+                        MoveNext();
                     }
-                    else 
-                    { 
+                    else
+                    {
                         currentDirection = Direction.IDLE;
                         mainForm.AddToLog("Lift " + liftID + " going idle.");
                     }
@@ -160,7 +175,8 @@ namespace LiftSimulator
 
             if (nextFloor != -1)
             {
-                mainForm.AddToLog("Lift " + liftID + " moving to " + nextFloor);
+                mainForm.AddToLog("Lift " + liftID + " next destination: " + nextFloor);
+                nextDestFloor = nextFloor;
                 Move(nextFloor);
             }
         }
@@ -170,7 +186,8 @@ namespace LiftSimulator
             if (liftImage.Top == floor_y[nextDestFloor])
             {
                 currentFloor = nextDestFloor;
-                if (currentDirection == Direction.UP)
+
+                if (currentFloor < nextDestFloor)
                 {
                     // If we're going up then reset the Up call button for this floor
                     mainForm.ResetCallButton(currentFloor, 0);
@@ -185,26 +202,8 @@ namespace LiftSimulator
                 mainForm.ResetLiftButton(currentFloor, liftID);
                 dtWait.Start();
             }
-            //else if (liftImage.Top > floor_y[0])
-            //{
-            //    // stop the lifts from disappearing... :/
-            //    liftImage.Top = floor_y[0];
-            //    dtMove.Stop();
-            //    destQueue[0] = 0;
-            //    dtWait.Start();
-            //}
-            //else if (liftImage.Top < floor_y[4])
-            //{
-            //    liftImage.Top = floor_y[4];
-            //    dtMove.Stop();
-            //    destQueue[4] = 0;
-            //    dtWait.Start();
-            //}
             else
             {
-                // TODO: We need to check if another floor has been added to the queue and if so
-                // set it as the nextdestfloor if it's between us and our current destination
-
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + (int)currentDirection;
             }
@@ -221,6 +220,11 @@ namespace LiftSimulator
             get { return currentFloor; }
         }
 
+        public int GetNextDest
+        {
+            get { return nextDestFloor; }
+        }
+
         public Direction GetCurrentDirection
         {
             get { return currentDirection; }
@@ -229,6 +233,11 @@ namespace LiftSimulator
         public bool IsIdle
         {
             get { if (GetCurrentDirection == 0) { return true; } else { return false; } }
+        }
+
+        public bool IsMoving
+        {
+            get { if (dtMove.IsEnabled) { return true; } else { return false; } }
         }
 
         public bool IsTravelling(int dir)

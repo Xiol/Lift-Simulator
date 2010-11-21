@@ -43,7 +43,7 @@ namespace LiftSimulator
         {
             foreach (Lift lift in lifts)
             {
-                if (lift.GetCurrentFloor == floor) { return true; }
+                if (lift.GetCurrentFloor == floor && !lift.IsMoving) { return true; }
             }
             return false;
         }

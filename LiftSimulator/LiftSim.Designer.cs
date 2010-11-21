@@ -556,6 +556,7 @@
             this.tbxLog.Location = new System.Drawing.Point(10, 13);
             this.tbxLog.Multiline = true;
             this.tbxLog.Name = "tbxLog";
+            this.tbxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbxLog.Size = new System.Drawing.Size(213, 181);
             this.tbxLog.TabIndex = 30;
             // 

@@ -13,7 +13,7 @@ namespace LiftSimulator
     {
         /*********************************************/
         readonly int[] FLOOR_Y = new int[5] { 344, 259, 173, 87, 3 }; // y axis of floor -> G,1,2,3,4
-        readonly int[] IDLE_FLOORS = new int[3] { 0, 2, 4 }; // floors the the lift's idle/start on
+        readonly int[] IDLE_FLOORS = new int[3] { 0, 0, 0 }; // floors the the lift's idle/start on
 
         private Button[][] liftButtons = new Button[3][];
         private PictureBox[][] callButtons = new PictureBox[5][];
@@ -81,13 +81,22 @@ namespace LiftSimulator
             switch (lift)
             {
                 case 1:
-                    if (lift1.GetCurrentFloor != floor) { lift1.AddDest(floor); destOK = true; }
+                    if (lift1.GetCurrentFloor != floor && !lift1.IsDest(floor)) 
+                    { 
+                        lift1.AddDest(floor); destOK = true; 
+                    }
                     break;
                 case 2:
-                    if (lift2.GetCurrentFloor != floor) { lift2.AddDest(floor); destOK = true; }
+                    if (lift2.GetCurrentFloor != floor && !lift2.IsDest(floor)) 
+                    {
+                        lift2.AddDest(floor); destOK = true; 
+                    }
                     break;
                 case 3:
-                    if (lift3.GetCurrentFloor != floor) { lift3.AddDest(floor); destOK = true; }
+                    if (lift3.GetCurrentFloor != floor && !lift3.IsDest(floor)) 
+                    { 
+                        lift3.AddDest(floor); destOK = true; 
+                    }
                     break;
                 default:
                     break;
@@ -118,13 +127,13 @@ namespace LiftSimulator
             if (direction == 0)
             {
                 // Going down
-               // picSender.Image = Properties.Resources.down_arrow_active;
+                picSender.Image = Properties.Resources.down_arrow_active;
                 lc.SendLift(floor, 1);
             }
             else
             {
                 // Going up
-              //  picSender.Image = Properties.Resources.up_arrow_active;
+                picSender.Image = Properties.Resources.up_arrow_active;
                 lc.SendLift(floor, -1);
             }
         }
