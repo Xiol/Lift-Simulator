@@ -28,10 +28,6 @@ namespace LiftSimulator
             {10,20,30,40,0}
         };
 
-        // Up and down queues for when 'people' push the up/down buttons on the floors
-        private int[] upQueueWaiting = new int[5] { 0, 0, 0, 0, 0 };
-        private int[] downQueueWaiting = new int[5] { 0, 0, 0, 0, 0 };
-
         public LiftController(int lnum)
         {
             lifts = new Lift[lnum];
@@ -60,16 +56,6 @@ namespace LiftSimulator
             }
 
             return false;
-        }
-
-        public void GoingUp(int calledFrom)
-        {
-            upQueueWaiting[calledFrom] = 1;
-        }
-
-        public void GoingDown(int calledFrom)
-        {
-            downQueueWaiting[calledFrom] = 1;
         }
 
         public void SendLift(int floor, int dir)

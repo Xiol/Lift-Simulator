@@ -79,12 +79,8 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
-            //if (currentDirection == Direction.IDLE)
-            //{
-                // If we're idle then start things off, otherwise just add to queue and return
-                MoveNext();
-            //}
-                mainForm.AddToLog("Lift " + liftID + " destination added " + floor.ToString());
+            MoveNext();
+            mainForm.AddToLog("Lift " + liftID + " destination added " + floor.ToString());
         }
 
         public bool IsDest(int floor)
@@ -148,9 +144,12 @@ namespace LiftSimulator
                     // Nothing left in the queue in this direction
                     // Check to see if we have anything that needs servicing in the opposite direction.
                     currentDirection = oppDir;
-                    if (IsQueued(currentFloor, oppDir)) { 
+                    if (IsQueued(currentFloor, oppDir)) 
+                    { 
                         MoveNext(); 
-                    } else { 
+                    }
+                    else 
+                    { 
                         currentDirection = Direction.IDLE;
                         mainForm.AddToLog("Lift " + liftID + " going idle.");
                     }
