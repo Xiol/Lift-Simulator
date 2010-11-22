@@ -13,7 +13,7 @@ namespace LiftSimulator
     {
         /*********************************************/
         readonly int[] FLOOR_Y = new int[5] { 344, 259, 173, 87, 3 }; // y axis of floor -> G,1,2,3,4
-        readonly int[] IDLE_FLOORS = new int[3] { 0, 0, 0 }; // floors the the lift's idle/start on
+        readonly int[] IDLE_FLOORS = new int[3] { 0, 0, 4 }; // floors the the lift's idle/start on
 
         private Button[][] liftButtons = new Button[3][];
         private PictureBox[][] callButtons = new PictureBox[5][];

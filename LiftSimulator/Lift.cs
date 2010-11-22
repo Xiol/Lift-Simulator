@@ -81,8 +81,12 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
-            mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());
-            MoveNext();
+            mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());           
+            if (!dtWait.IsEnabled)
+            {
+                // If we're waiting already then the timer will call MoveNext for us.
+                MoveNext();
+            }
         }
 
         public bool IsDest(int floor)
@@ -158,9 +162,9 @@ namespace LiftSimulator
                 {
                     // Nothing left in the queue in this direction
                     // Check to see if we have anything that needs servicing in the opposite direction.
-                    currentDirection = oppDir;
                     if (IsQueued(currentFloor, oppDir))
                     {
+                        currentDirection = oppDir;
                         MoveNext();
                     }
                     else
@@ -185,8 +189,6 @@ namespace LiftSimulator
         {
             if (liftImage.Top == floor_y[nextDestFloor])
             {
-                currentFloor = nextDestFloor;
-
                 if (currentFloor < nextDestFloor)
                 {
                     // If we're going up then reset the Up call button for this floor
@@ -197,6 +199,7 @@ namespace LiftSimulator
                     // Else reset the down one
                     mainForm.ResetCallButton(currentFloor, 1);
                 }
+                currentFloor = nextDestFloor;
                 dtMove.Stop();
                 destQueue[currentFloor] = 0;
                 mainForm.ResetLiftButton(currentFloor, liftID);
@@ -206,6 +209,7 @@ namespace LiftSimulator
             {
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + (int)currentDirection;
+                SetCurrentFloor(currentDirection);
             }
         }
 
@@ -223,6 +227,64 @@ namespace LiftSimulator
         public int GetNextDest
         {
             get { return nextDestFloor; }
+        }
+
+        public void SetCurrentFloor(Direction dir)
+        {
+            if (dir == Direction.UP)
+            {
+                if ((floor_y[0] > liftImage.Top && floor_y[1] < liftImage.Top) || floor_y[0] == liftImage.Top)
+                {
+                    currentFloor = 0;
+                }
+                else if ((floor_y[1] > liftImage.Top && floor_y[2] < liftImage.Top) || floor_y[1] == liftImage.Top)
+                {
+                    currentFloor = 1;
+                }
+                else if ((floor_y[2] > liftImage.Top && floor_y[3] < liftImage.Top) || floor_y[2] == liftImage.Top)
+                {
+                    currentFloor = 2;
+                }
+                else if ((floor_y[3] > liftImage.Top && floor_y[4] < liftImage.Top) || floor_y[3] == liftImage.Top)
+                {
+                    currentFloor = 3;
+                }
+                else if (floor_y[4] == liftImage.Top)
+                {
+                    currentFloor = 4;
+                }
+                else
+                {
+                    currentFloor = -1; // this should not happen
+                }
+            }
+            else if (dir == Direction.DOWN)
+            {
+                if ((floor_y[4] < liftImage.Top && floor_y[3] > liftImage.Top) || floor_y[4] == liftImage.Top)
+                {
+                    currentFloor = 4;
+                }
+                else if ((floor_y[3] < liftImage.Top && floor_y[2] > liftImage.Top) || floor_y[3] == liftImage.Top)
+                {
+                    currentFloor = 3;
+                }
+                else if ((floor_y[2] < liftImage.Top && floor_y[1] > liftImage.Top) || floor_y[2] == liftImage.Top)
+                {
+                    currentFloor = 2;
+                }
+                else if ((floor_y[1] < liftImage.Top && floor_y[0] > liftImage.Top) || floor_y[1] == liftImage.Top)
+                {
+                    currentFloor = 1;
+                }
+                else if (floor_y[0] == liftImage.Top)
+                {
+                    currentFloor = 0;
+                }
+                else
+                {
+                    currentFloor = -1; // this should not happen
+                }
+            }
         }
 
         public Direction GetCurrentDirection
