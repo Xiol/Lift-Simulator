@@ -54,20 +54,20 @@ namespace LiftSimulator
             dtWait.Tick += new EventHandler(dtWait_Tick);
         }
 
+        /// <summary>
+        /// Moves the lift to the specified floor.
+        /// </summary>
+        /// <param name="floor">The floor to move to.</param>
         public void Move(int floor)
         {
             if (currentFloor < floor)
             {
                 currentDirection = Direction.UP;
-                //nextDestFloor = floor; // TEMPORARY
-                //currentFloor = -1;
                 dtMove.Start();
             }
             else if (currentFloor > floor)
             {
                 currentDirection = Direction.DOWN;
-                //nextDestFloor = floor; // TEMPORARY
-                //currentFloor = -1;
                 dtMove.Start();
             }
             else
@@ -78,6 +78,12 @@ namespace LiftSimulator
             }
         }
 
+        /// <summary>
+        /// Add a destination to our queue. This function will call MoveNext() to recheck the
+        /// queue and move to the new floor if it's between our current location and our original
+        /// destination.
+        /// </summary>
+        /// <param name="floor">The floor to add to the queue.</param>
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
@@ -90,15 +96,26 @@ namespace LiftSimulator
             }
         }
 
+        /// <summary>
+        /// This will check if a floor is already in the queue.
+        /// </summary>
+        /// <param name="floor">The floor to check.</param>
+        /// <returns>True if the floor is in the queue.</returns>
         public bool IsDest(int floor)
         {
             if (destQueue[floor] == 1) { return true; } else { return false; }
         }
 
+        /// <summary>
+        /// This will check to see if there are any floors that need servicing in the direction
+        /// specified, from the floor specified. Once it reaches the end of the queue in that
+        /// direction, it will return false if it does not find anything.
+        /// </summary>
+        /// <param name="startFloor">The floor to being our search from.</param>
+        /// <param name="direction">The direction we wish to search.</param>
+        /// <returns>True if floor requires service. False if nothing in that direction.</returns>
         private bool IsQueued(int startFloor, Direction direction)
         {
-            // Check to see if there is any floors waiting to be serviced in the direction
-            // specified, from the floor specified.
             if (direction == Direction.UP)
             {
                 for (int i = startFloor; i <= 4; i++)
@@ -116,6 +133,13 @@ namespace LiftSimulator
             return false;
         }
 
+        /// <summary>
+        /// This function will check to see if there are any floors left in the queue in our
+        /// current travelling direction. If there are, that will become our next destination
+        /// and we shall start moving towards it. If not, it will check for floors to service
+        /// in the opposite direction and start moving towards them.
+        /// Failing that, the lift will go idle.
+        /// </summary>
         public void MoveNext()
         {
             //if (dtMove.IsEnabled) { return; }
@@ -190,10 +214,11 @@ namespace LiftSimulator
         {
             if (liftImage.Top == floor_y[nextDestFloor])
             {
-                currentFloor = nextDestFloor;
+                // We have arrived.
                 dtMove.Stop();
-                destQueue[currentFloor] = 0;
-                mainForm.ResetLiftButton(currentFloor, liftID);
+                currentFloor = nextDestFloor;
+                destQueue[currentFloor] = 0;    // Remove this floor from the queue
+                mainForm.ResetLiftButton(currentFloor, liftID); // Reset the lift button for this floor
 
                 if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.UP)
                 {
@@ -214,31 +239,45 @@ namespace LiftSimulator
             }
             else
             {
+                // We have not arrived! Carry on moving 1px per tick.
                 // If currentDirection is -1 this will move the lift down, otherwise up, every tick
                 liftImage.Top = liftImage.Top + (int)currentDirection;
-                SetCurrentFloor(currentDirection);
+                SetCurrentFloor();
             }
         }
 
         private void dtWait_Tick(object sender, EventArgs e)
         {
+            // Wait for 'people' to get on/off the lift, then call MoveNext.
             dtWait.Stop();
             MoveNext();
         }
 
+        /// <summary>
+        /// Get the current floor of the lift. This does not guarentee that the lift 
+        /// has, or will, stop on that floor.
+        /// </summary>
         public int GetCurrentFloor
         {
             get { return currentFloor; }
         }
 
+        /// <summary>
+        /// Get the next destination of the lift.
+        /// </summary>
         public int GetNextDest
         {
             get { return nextDestFloor; }
         }
 
-        public void SetCurrentFloor(Direction dir)
+        /// <summary>
+        /// As the lift moves, this function should be called every tick to check the current
+        /// location of the lift. As the lift moves between floors this will set the currentFloor
+        /// variable to the correct value.
+        /// </summary>
+        public void SetCurrentFloor()
         {
-            if (dir == Direction.UP)
+            if (currentDirection == Direction.UP)
             {
                 if ((floor_y[0] > liftImage.Top && floor_y[1] < liftImage.Top) || floor_y[0] == liftImage.Top)
                 {
@@ -265,7 +304,7 @@ namespace LiftSimulator
                     currentFloor = -1; // this should not happen
                 }
             }
-            else if (dir == Direction.DOWN)
+            else if (currentDirection == Direction.DOWN)
             {
                 if ((floor_y[4] < liftImage.Top && floor_y[3] > liftImage.Top) || floor_y[4] == liftImage.Top)
                 {
@@ -294,21 +333,33 @@ namespace LiftSimulator
             }
         }
 
+        /// <summary>
+        /// Gets the current direction of the lift.
+        /// </summary>
         public Direction GetCurrentDirection
         {
             get { return currentDirection; }
         }
 
+        /// <summary>
+        /// Returns true if the lift is currently idling.
+        /// </summary>
         public bool IsIdle
         {
             get { if (GetCurrentDirection == 0) { return true; } else { return false; } }
         }
 
+        /// <summary>
+        /// Returns true if the lift is moving.
+        /// </summary>
         public bool IsMoving
         {
             get { if (dtMove.IsEnabled) { return true; } else { return false; } }
         }
 
+        /// <summary>
+        /// Returns true if the queue is empty.
+        /// </summary>
         public bool IsQueueEmpty
         {
             get
@@ -316,6 +367,12 @@ namespace LiftSimulator
                 if (destQueue.Contains(1)) { return false; } else { return true; }
             }
         }
+
+        /// <summary>
+        /// Function to check if the lift is currently travelling in the specified direction.
+        /// </summary>
+        /// <param name="dir">The direction of travel we wish to check.</param>
+        /// <returns>True if we are travelling in the direction specified.</returns>
         public bool IsTravelling(int dir)
         {
             if (GetCurrentDirection == (Direction)dir) { return true; }

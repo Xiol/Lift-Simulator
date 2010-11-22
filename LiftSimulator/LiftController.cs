@@ -82,7 +82,7 @@ namespace LiftSimulator
                     int liftPrio = liftFlrPrio[liftFloor, floor];
 
                     // Lift already on the floor
-                    if (liftPrio == 0 && lifts[i].IsTravelling(trav)) { return -1; }
+                    if (liftPrio == 0 && !lifts[i].IsTravelling(trav)) { return -1; }
 
                     if (highestPrio == liftPrio)
                     {
