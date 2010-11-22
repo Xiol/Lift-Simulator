@@ -182,7 +182,7 @@
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(10, 206);
+            this.label1.Location = new System.Drawing.Point(12, 212);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(484, 3);
             this.label1.TabIndex = 13;
@@ -190,7 +190,7 @@
             // lblFlr4
             // 
             this.lblFlr4.AutoSize = true;
-            this.lblFlr4.Location = new System.Drawing.Point(12, 212);
+            this.lblFlr4.Location = new System.Drawing.Point(12, 215);
             this.lblFlr4.Name = "lblFlr4";
             this.lblFlr4.Size = new System.Drawing.Size(39, 13);
             this.lblFlr4.TabIndex = 14;

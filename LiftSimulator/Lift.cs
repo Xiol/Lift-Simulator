@@ -81,7 +81,8 @@ namespace LiftSimulator
         public void AddDest(int floor)
         {
             destQueue[floor] = 1;
-            mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());           
+            mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());
+            //mainForm.AddToLog(destQueue[0] + " " + destQueue[1] + " " + destQueue[2] + " " + destQueue[3] + " " + destQueue[4]);
             if (!dtWait.IsEnabled)
             {
                 // If we're waiting already then the timer will call MoveNext for us.
@@ -189,20 +190,26 @@ namespace LiftSimulator
         {
             if (liftImage.Top == floor_y[nextDestFloor])
             {
-                if (currentFloor < nextDestFloor)
-                {
-                    // If we're going up then reset the Up call button for this floor
-                    mainForm.ResetCallButton(currentFloor, 0);
-                }
-                else
-                {
-                    // Else reset the down one
-                    mainForm.ResetCallButton(currentFloor, 1);
-                }
                 currentFloor = nextDestFloor;
                 dtMove.Stop();
                 destQueue[currentFloor] = 0;
                 mainForm.ResetLiftButton(currentFloor, liftID);
+
+                if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.UP)
+                {
+                    // If we're going up then reset the Up call button for this floor
+                    mainForm.ResetCallButton(currentFloor, 0);
+                }
+                else if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.DOWN)
+                {
+                    // Else reset the down one
+                    mainForm.ResetCallButton(currentFloor, 1);
+                }
+                else if (IsQueueEmpty)
+                {
+                    mainForm.ResetCallButton(currentFloor, 0);
+                    mainForm.ResetCallButton(currentFloor, 1);
+                }
                 dtWait.Start();
             }
             else
@@ -302,6 +309,13 @@ namespace LiftSimulator
             get { if (dtMove.IsEnabled) { return true; } else { return false; } }
         }
 
+        public bool IsQueueEmpty
+        {
+            get
+            {
+                if (destQueue.Contains(1)) { return false; } else { return true; }
+            }
+        }
         public bool IsTravelling(int dir)
         {
             if (GetCurrentDirection == (Direction)dir) { return true; }

@@ -71,7 +71,6 @@ namespace LiftSimulator
 
         private int GetNearestLift(int floor, int trav)
         {
-            // TODO: Check direction lift is already travelling
             int liftToSend = -1;
             int highestPrio = -1;
 
@@ -83,8 +82,7 @@ namespace LiftSimulator
                     int liftPrio = liftFlrPrio[liftFloor, floor];
 
                     // Lift already on the floor
-                    // TODO: nextDest of that lift needs to be in the same direction
-                    if (liftPrio == 0) { return -1; }
+                    if (liftPrio == 0 && lifts[i].IsTravelling(trav)) { return -1; }
 
                     if (highestPrio == liftPrio)
                     {
