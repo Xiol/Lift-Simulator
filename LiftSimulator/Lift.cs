@@ -223,15 +223,18 @@ namespace LiftSimulator
                 if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.UP)
                 {
                     // If we're going up then reset the Up call button for this floor
+                    mainForm.AddToLog("Resetting Up Button on floor " + currentFloor);
                     mainForm.ResetCallButton(currentFloor, 0);
                 }
                 else if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.DOWN)
                 {
                     // Else reset the down one
+                    mainForm.AddToLog("Resetting Down Button on floor " + currentFloor);
                     mainForm.ResetCallButton(currentFloor, 1);
                 }
                 else if (IsQueueEmpty)
                 {
+                    mainForm.AddToLog("Resetting all buttons on floor " + currentFloor);
                     mainForm.ResetCallButton(currentFloor, 0);
                     mainForm.ResetCallButton(currentFloor, 1);
                 }

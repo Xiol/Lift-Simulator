@@ -7,6 +7,7 @@ namespace LiftSimulator
 {
     class LiftController
     {
+        // Copy of our Direction enum from Lift.cs... Not the best way to do it
         public enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
         // List of lifts we control
         private Lift[] lifts;
@@ -28,17 +29,33 @@ namespace LiftSimulator
             {10,20,30,40,0}
         };
 
+        /// <summary>
+        /// Creates a new LiftController to handle the Call buttons.
+        /// </summary>
+        /// <param name="lnum">The number of lifts this controller is going to handle.</param>
         public LiftController(int lnum)
         {
             lifts = new Lift[lnum];
         }
 
-        public void AddLift(Lift l)
+        /// <summary>
+        /// Add a lift to the controller. Do not add more lifts than the controller was intended
+        /// to handle when it was instansiated.
+        /// </summary>
+        /// <param name="lift">A Lift object.</param>
+        public void AddLift(Lift lift)
         {
-            lifts[ali] = l;
+            lifts[ali] = lift;
             ali++;
         }
 
+        /// <summary>
+        /// Checks to see if a lift under the control of the LiftController
+        /// is already on the floor specified. This will only return True
+        /// if the lift is NOT moving.
+        /// </summary>
+        /// <param name="floor">The floor to check.</param>
+        /// <returns>True if a lift is on the floor.</returns>
         public bool IsLiftOnFloor(int floor)
         {
             foreach (Lift lift in lifts)
@@ -48,6 +65,12 @@ namespace LiftSimulator
             return false;
         }
 
+        /// <summary>
+        /// Checks to see if a lift under the control of the LiftController already
+        /// has the floor specifed in it's queue.
+        /// </summary>
+        /// <param name="floor">The floor to check.</param>
+        /// <returns>True if a lift has that destination.</returns>
         public bool LiftHasDest(int floor)
         {
             foreach (Lift lift in lifts)
@@ -58,6 +81,11 @@ namespace LiftSimulator
             return false;
         }
 
+        /// <summary>
+        /// Sends the nearest lift that's travelling in the specified direction to the floor requested.
+        /// </summary>
+        /// <param name="floor">The floor to send the lift to.</param>
+        /// <param name="dir">The direction the lift should be travelling in.</param>
         public void SendLift(int floor, int dir)
         {
             int nl = GetNearestLift(floor, dir);
@@ -69,6 +97,12 @@ namespace LiftSimulator
             }
         }
 
+        /// <summary>
+        /// Get the nearest lift to the floor specifed, that's travelling in the direction requested.
+        /// </summary>
+        /// <param name="floor">The floor that needs the lift.</param>
+        /// <param name="trav">The direction the lift should be travelling in.</param>
+        /// <returns>An integer corresponding to the lifts location in the lifts array.</returns>
         private int GetNearestLift(int floor, int trav)
         {
             int liftToSend = -1;

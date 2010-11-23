@@ -138,67 +138,60 @@ namespace LiftSimulator
             }
         }
 
+        /// <summary>
+        /// Reset the specifed call button by changing the image back to the intial one.
+        /// </summary>
+        /// <param name="floor">The floor of the call button.</param>
+        /// <param name="direction">0 for the Up call button, 1 for the Down call button.</param>
         public void ResetCallButton(int floor, int direction)
         {
-            switch (floor)
+            if (callButtons[floor][direction] != null && direction < 2)
             {
-                case 0:
-                    if (direction == 0) { pbx0Up.Image = Properties.Resources.up_arrow; }
-                    break;
-                case 1:
-                    if (direction == 0) { pbx1Up.Image = Properties.Resources.up_arrow; }
-                    else { pbx1Down.Image = Properties.Resources.down_arrow; }
-                    break;
-                case 2:
-                    if (direction == 0) { pbx2Up.Image = Properties.Resources.up_arrow; }
-                    else { pbx2Down.Image = Properties.Resources.down_arrow; }
-                    break;
-                case 3:
-                    if (direction == 0) { pbx3Up.Image = Properties.Resources.up_arrow; }
-                    else { pbx3Down.Image = Properties.Resources.down_arrow; }
-                    break;
-                case 4:
-                    if (direction == 1) { pbx4Down.Image = Properties.Resources.down_arrow; }
-                    break;
-                default:
-                    break;
+                if (direction == 0)
+                {
+                    ResetUpCallButton(callButtons[floor][direction]);
+                }
+                else
+                {
+                    ResetDownCallButton(callButtons[floor][direction]);
+                }
             }
         }
 
+        /// <summary>
+        /// Reset a call button with the Up arrow image.
+        /// </summary>
+        /// <param name="pbx">The PictureBox object whose Image property we need to set</param>
         private void ResetUpCallButton(PictureBox pbx)
         {
             pbx.Image = Properties.Resources.up_arrow;
         }
 
+        /// <summary>
+        /// Reset a call button with the Down arrow image.
+        /// </summary>
+        /// <param name="pbx">The PictureBox object whose Image property we need to set</param>
         private void ResetDownCallButton(PictureBox pbx)
         {
             pbx.Image = Properties.Resources.down_arrow;
         }
 
+        /// <summary>
+        /// Reset the foreground and background colours of the specified lift button.
+        /// </summary>
+        /// <param name="floor">The number of the floor whose button we need to reset.</param>
+        /// <param name="lift">Which Lift does this button correspond to.</param>
         public void ResetLiftButton(int floor, int lift)
         {
-            switch (lift)
-            {
-                case 1:
-                    _ResetLiftButton(liftButtons[0][floor]);
-                    break;
-                case 2:
-                    _ResetLiftButton(liftButtons[1][floor]);
-                    break;
-                case 3:
-                    _ResetLiftButton(liftButtons[2][floor]);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void _ResetLiftButton(Button btn)
-        {
+            Button btn = liftButtons[lift - 1][floor];
             btn.ForeColor = Color.Black;
             btn.BackColor = Color.Gainsboro;
         }
 
+        /// <summary>
+        /// Add a line of text to the log.
+        /// </summary>
+        /// <param name="text">The text to add. Carriage returns added automatically.</param>
         public void AddToLog(string text)
         {
             tbxLog.AppendText(text + "\r\n");
