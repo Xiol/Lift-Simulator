@@ -9,10 +9,13 @@ namespace LiftSimulator
     {
         // Copy of our Direction enum from Lift.cs... Not the best way to do it
         public enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
-        // List of lifts we control
+
+        // Array of lifts we control
         private Lift[] lifts;
-        // Index for adding items to the lifts array
-        private int ali = 0;
+
+        // Lift array index variable.
+        private int lai = 0;
+
         // Used for picking a lift if we have a clash
         Random randGen = new Random();
 
@@ -40,13 +43,13 @@ namespace LiftSimulator
 
         /// <summary>
         /// Add a lift to the controller. Do not add more lifts than the controller was intended
-        /// to handle when it was instansiated.
+        /// to handle when it was instantiated.
         /// </summary>
         /// <param name="lift">A Lift object.</param>
         public void AddLift(Lift lift)
         {
-            lifts[ali] = lift;
-            ali++;
+            lifts[lai] = lift;
+            lai++;
         }
 
         /// <summary>
@@ -98,25 +101,33 @@ namespace LiftSimulator
         }
 
         /// <summary>
-        /// Get the nearest lift to the floor specifed, that's travelling in the direction requested.
+        /// Get the nearest lift to the floor specifed, that's travelling in the direction requested. Uses magic.
         /// </summary>
-        /// <param name="floor">The floor that needs the lift.</param>
+        /// <param name="destfloor">The floor that needs the lift.</param>
         /// <param name="trav">The direction the lift should be travelling in.</param>
         /// <returns>An integer corresponding to the lifts location in the lifts array.</returns>
-        private int GetNearestLift(int floor, int trav)
+        private int GetNearestLift(int destfloor, int trav)
         {
             int liftToSend = -1;
             int highestPrio = -1;
 
+            // Loop through our lifts.
             for (int i = 0; i < lifts.Count(); i++)
             {
-                if (lifts[i].IsTravelling(trav) && !LiftHasDest(floor))
+                // If there is already a lift on that floor then we do not need to send one.
+                if (lifts[i].GetCurrentFloor == destfloor)
+                {
+                    return -1;
+                }
+
+                // Check to see if the lift is already travelling in the same direction
+                // we wish to travel, and ensure that no lift already has this floor
+                // as a destination.
+                if (lifts[i].IsTravelling(trav) && !LiftHasDest(destfloor))
                 {
                     int liftFloor = lifts[i].GetCurrentFloor;
-                    int liftPrio = liftFlrPrio[liftFloor, floor];
-
-                    // Lift already on the floor
-                    if (liftPrio == 0 && !lifts[i].IsTravelling(trav)) { return -1; }
+                    // Get the priority of this lift in relation to the floor requested
+                    int liftPrio = liftFlrPrio[liftFloor, destfloor];
 
                     if (highestPrio == liftPrio)
                     {
@@ -141,7 +152,44 @@ namespace LiftSimulator
                 }
             }
 
+            // When we have finished looping, we will the number of the nearest lift.
             return liftToSend;
+        }
+
+        /// <summary>
+        /// Moves all the lifts under control of the LiftController to the bottom floor.
+        /// </summary>
+        public void MoveAllToBottom()
+        {
+            foreach (Lift lift in lifts)
+            {
+                lift.EmptyQueue();
+                lift.AddDest(0);
+            }
+        }
+
+        /// <summary>
+        /// Moves all the lifts under control of the LiftController to the top floor.
+        /// </summary>
+        public void MoveAllToTop()
+        {
+            foreach (Lift lift in lifts)
+            {
+                lift.EmptyQueue();
+                lift.AddDest(4);
+            }
+        }
+
+        /// <summary>
+        /// Moves all the lifts under control of the LiftController to their starting positions.
+        /// </summary>
+        public void MoveAllToIdle()
+        {
+            foreach (Lift lift in lifts)
+            {
+                lift.EmptyQueue();
+                lift.AddDest(lift.idleFloor);
+            }
         }
     }
 }

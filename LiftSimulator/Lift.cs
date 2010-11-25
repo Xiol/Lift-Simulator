@@ -12,7 +12,7 @@ namespace LiftSimulator
         /************************************************************************************************/
         private PictureBox liftImage;           // The object we need to control for this lift
         private int[] floor_y = new int[5];     // The y location of each floor
-        private int idleFloor;                  // The floor which this lift starts on and returns to when idle
+        public int idleFloor;                  // The floor which this lift starts on and returns to when idle
         private int currentFloor;               // Current location of the lift
         public enum Direction { UP = -1, IDLE, DOWN };   // Up = -1, Idle = 0, Down = 1
         private Direction currentDirection = Direction.IDLE;
@@ -86,6 +86,8 @@ namespace LiftSimulator
         /// <param name="floor">The floor to add to the queue.</param>
         public void AddDest(int floor)
         {
+            if (currentFloor == floor) { return; }
+
             destQueue[floor] = 1;
             mainForm.AddToLog("Lift " + liftID + " destination added: " + floor.ToString());
             //mainForm.AddToLog(destQueue[0] + " " + destQueue[1] + " " + destQueue[2] + " " + destQueue[3] + " " + destQueue[4]);
@@ -220,24 +222,25 @@ namespace LiftSimulator
                 destQueue[currentFloor] = 0;    // Remove this floor from the queue
                 mainForm.ResetLiftButton(currentFloor, liftID); // Reset the lift button for this floor
 
+                /*
                 if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.UP)
                 {
                     // If we're going up then reset the Up call button for this floor
                     mainForm.AddToLog("Resetting Up Button on floor " + currentFloor);
-                    mainForm.ResetCallButton(currentFloor, 0);
+                    mainForm.ResetCallButton(currentFloor, 1);
                 }
                 else if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.DOWN)
                 {
                     // Else reset the down one
                     mainForm.AddToLog("Resetting Down Button on floor " + currentFloor);
-                    mainForm.ResetCallButton(currentFloor, 1);
+                    mainForm.ResetCallButton(currentFloor, 0);
                 }
                 else if (IsQueueEmpty)
-                {
+                { */
                     mainForm.AddToLog("Resetting all buttons on floor " + currentFloor);
                     mainForm.ResetCallButton(currentFloor, 0);
                     mainForm.ResetCallButton(currentFloor, 1);
-                }
+                //}
                 dtWait.Start();
             }
             else
@@ -381,6 +384,22 @@ namespace LiftSimulator
             if (GetCurrentDirection == (Direction)dir) { return true; }
             else if (IsIdle) { return true; }
             else { return false; } 
+        }
+
+        /// <summary>
+        /// Empties the queue. Because the queue is empty, this will also set
+        /// the current direction to idle and stop the lift.
+        /// </summary>
+        public void EmptyQueue()
+        {
+            for (int i = 0; i < destQueue.Count(); i++)
+            {
+                destQueue[i] = 0;
+            }
+            dtMove.Stop();
+            dtWait.Stop();
+            currentDirection = Direction.IDLE;
+            mainForm.AddToLog("Queue emptied for lift " + liftID);
         }
     }
 }

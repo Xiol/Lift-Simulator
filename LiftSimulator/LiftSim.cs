@@ -49,7 +49,7 @@ namespace LiftSimulator
             liftButtons[2] = new Button[5] { btnL3FG, btnL3F1, btnL3F2, btnL3F3, btnL3F4 };
 
             // Same thing for our call 'buttons'
-            callButtons[0] = new PictureBox[2] { null, pbx0Up };
+            callButtons[0] = new PictureBox[2] { null,     pbx0Up };
             callButtons[1] = new PictureBox[2] { pbx1Down, pbx1Up };
             callButtons[2] = new PictureBox[2] { pbx2Down, pbx2Up };
             callButtons[3] = new PictureBox[2] { pbx3Down, pbx3Up };
@@ -73,6 +73,7 @@ namespace LiftSimulator
             // Strings are arrays of characters, so we can get the individual characters we need
             // FIXME: Convert.ToInt32 can parse characters, but returns the decimal ASCII value of those characters
             // So we need to get the character, convert it to a string, then convert it to an int.
+            // Casting to an integer doesn't work either...
             int lift = Int32.Parse(buttonTag[0].ToString());
             int floor = Int32.Parse(buttonTag[1].ToString());
 
@@ -142,38 +143,20 @@ namespace LiftSimulator
         /// Reset the specifed call button by changing the image back to the intial one.
         /// </summary>
         /// <param name="floor">The floor of the call button.</param>
-        /// <param name="direction">0 for the Up call button, 1 for the Down call button.</param>
+        /// <param name="direction">1 for the Up call button, 0 for the Down call button.</param>
         public void ResetCallButton(int floor, int direction)
         {
             if (callButtons[floor][direction] != null && direction < 2)
             {
                 if (direction == 0)
                 {
-                    ResetUpCallButton(callButtons[floor][direction]);
+                    callButtons[floor][direction].Image = Properties.Resources.down_arrow;
                 }
                 else
                 {
-                    ResetDownCallButton(callButtons[floor][direction]);
+                    callButtons[floor][direction].Image = Properties.Resources.up_arrow;
                 }
             }
-        }
-
-        /// <summary>
-        /// Reset a call button with the Up arrow image.
-        /// </summary>
-        /// <param name="pbx">The PictureBox object whose Image property we need to set</param>
-        private void ResetUpCallButton(PictureBox pbx)
-        {
-            pbx.Image = Properties.Resources.up_arrow;
-        }
-
-        /// <summary>
-        /// Reset a call button with the Down arrow image.
-        /// </summary>
-        /// <param name="pbx">The PictureBox object whose Image property we need to set</param>
-        private void ResetDownCallButton(PictureBox pbx)
-        {
-            pbx.Image = Properties.Resources.down_arrow;
         }
 
         /// <summary>
@@ -195,6 +178,57 @@ namespace LiftSimulator
         public void AddToLog(string text)
         {
             tbxLog.AppendText(text + "\r\n");
+        }
+
+        private void btnToBottom_Click(object sender, EventArgs e)
+        {
+            // Moves all lifts to the bottom floor.
+            _ResetButtons();
+            lc.MoveAllToBottom();
+            AddToLog("Moving all lifts to 0");
+        }
+
+        private void btnToTop_Click(object sender, EventArgs e)
+        {
+            // Moves all lifts to the top floor.
+            _ResetButtons();
+            lc.MoveAllToTop();
+            AddToLog("Moving all lifts to 4");
+        }
+
+        private void btnResetAll_Click(object sender, EventArgs e)
+        {
+            // Moves all lifts to their starting/idle positions.
+            _ResetButtons();
+            lc.MoveAllToIdle();
+            AddToLog("Moving all lifts to starting floors");
+        }
+
+        private void btnResetButtons_Click(object sender, EventArgs e)
+        {
+            _ResetButtons();   
+        }
+
+        private void _ResetButtons()
+        {
+            // Loops through all the buttons on the form and resets
+            // them back to their original state.
+            foreach (Button[] liftBtn in liftButtons)
+            {
+                foreach (Button btn in liftBtn)
+                {
+                    btn.ForeColor = Color.Black;
+                    btn.BackColor = Color.Gainsboro;
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int n = 0; n < 2; n++)
+                {
+                    ResetCallButton(i, n);
+                }  
+            }
         }
     }
 }
