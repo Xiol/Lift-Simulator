@@ -180,6 +180,29 @@ namespace LiftSimulator
             tbxLog.AppendText(text + "\r\n");
         }
 
+        /// <summary>
+        /// Updates the lift floor labels.
+        /// </summary>
+        /// <param name="floor">The floor number to display.</param>
+        /// <param name="lift">The lift whose number to update.</param>
+        public void UpdateFloorDisp(int floor, int lift)
+        {
+            switch (lift)
+            {
+                case 1:
+                    lblFlrDisp1.Text = floor.ToString();
+                    break;
+                case 2:
+                    lblFlrDisp2.Text = floor.ToString();
+                    break;
+                case 3:
+                    lblFlrDisp3.Text = floor.ToString();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void btnToBottom_Click(object sender, EventArgs e)
         {
             // Moves all lifts to the bottom floor.
@@ -229,6 +252,11 @@ namespace LiftSimulator
                     ResetCallButton(i, n);
                 }  
             }
+        }
+
+        private void tbxLog_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

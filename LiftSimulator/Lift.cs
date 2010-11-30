@@ -52,6 +52,8 @@ namespace LiftSimulator
 
             dtWait.Interval = TimeSpan.FromSeconds(2);
             dtWait.Tick += new EventHandler(dtWait_Tick);
+
+            mainForm.UpdateFloorDisp(currentFloor, liftID);
         }
 
         /// <summary>
@@ -221,26 +223,8 @@ namespace LiftSimulator
                 currentFloor = nextDestFloor;
                 destQueue[currentFloor] = 0;    // Remove this floor from the queue
                 mainForm.ResetLiftButton(currentFloor, liftID); // Reset the lift button for this floor
-
-                /*
-                if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.UP)
-                {
-                    // If we're going up then reset the Up call button for this floor
-                    mainForm.AddToLog("Resetting Up Button on floor " + currentFloor);
-                    mainForm.ResetCallButton(currentFloor, 1);
-                }
-                else if (IsQueued(currentFloor, currentDirection) && currentDirection == Direction.DOWN)
-                {
-                    // Else reset the down one
-                    mainForm.AddToLog("Resetting Down Button on floor " + currentFloor);
-                    mainForm.ResetCallButton(currentFloor, 0);
-                }
-                else if (IsQueueEmpty)
-                { */
-                    mainForm.AddToLog("Resetting all buttons on floor " + currentFloor);
-                    mainForm.ResetCallButton(currentFloor, 0);
-                    mainForm.ResetCallButton(currentFloor, 1);
-                //}
+                mainForm.ResetCallButton(currentFloor, 0);
+                mainForm.ResetCallButton(currentFloor, 1);
                 dtWait.Start();
             }
             else
@@ -337,6 +321,7 @@ namespace LiftSimulator
                     currentFloor = -1; // this should not happen
                 }
             }
+            mainForm.UpdateFloorDisp(currentFloor, liftID);
         }
 
         /// <summary>

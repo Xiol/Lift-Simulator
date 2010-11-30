@@ -63,7 +63,7 @@ namespace LiftSimulator
         {
             foreach (Lift lift in lifts)
             {
-                if (lift.GetCurrentFloor == floor && !lift.IsMoving) { return true; }
+                if (lift.GetCurrentFloor == floor) { return true; }
             }
             return false;
         }
@@ -120,10 +120,8 @@ namespace LiftSimulator
                     return -1;
                 }
 
-                // Check to see if the lift is already travelling in the same direction
-                // we wish to travel, and ensure that no lift already has this floor
-                // as a destination.
-                if (lifts[i].IsTravelling(trav) && !LiftHasDest(destfloor))
+                // Ensure that no lift already has this floor as a destination.
+                if (!LiftHasDest(destfloor))
                 {
                     int liftFloor = lifts[i].GetCurrentFloor;
                     // Get the priority of this lift in relation to the floor requested

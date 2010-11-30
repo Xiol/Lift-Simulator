@@ -45,18 +45,21 @@
             this.lblFlr1 = new System.Windows.Forms.Label();
             this.lblFlrGnd = new System.Windows.Forms.Label();
             this.gbxLift1Cntr = new System.Windows.Forms.GroupBox();
+            this.lblFlrDisp1 = new System.Windows.Forms.Label();
             this.btnL1FG = new System.Windows.Forms.Button();
             this.btnL1F1 = new System.Windows.Forms.Button();
             this.btnL1F2 = new System.Windows.Forms.Button();
             this.btnL1F3 = new System.Windows.Forms.Button();
             this.btnL1F4 = new System.Windows.Forms.Button();
             this.gbxLift2Cntr = new System.Windows.Forms.GroupBox();
+            this.lblFlrDisp2 = new System.Windows.Forms.Label();
             this.btnL2FG = new System.Windows.Forms.Button();
             this.btnL2F1 = new System.Windows.Forms.Button();
             this.btnL2F2 = new System.Windows.Forms.Button();
             this.btnL2F3 = new System.Windows.Forms.Button();
             this.btnL2F4 = new System.Windows.Forms.Button();
             this.gbxLift3Cntr = new System.Windows.Forms.GroupBox();
+            this.lblFlrDisp3 = new System.Windows.Forms.Label();
             this.btnL3FG = new System.Windows.Forms.Button();
             this.btnL3F1 = new System.Windows.Forms.Button();
             this.btnL3F2 = new System.Windows.Forms.Button();
@@ -240,22 +243,33 @@
             // 
             // gbxLift1Cntr
             // 
+            this.gbxLift1Cntr.Controls.Add(this.lblFlrDisp1);
             this.gbxLift1Cntr.Controls.Add(this.btnL1FG);
             this.gbxLift1Cntr.Controls.Add(this.btnL1F1);
             this.gbxLift1Cntr.Controls.Add(this.btnL1F2);
             this.gbxLift1Cntr.Controls.Add(this.btnL1F3);
             this.gbxLift1Cntr.Controls.Add(this.btnL1F4);
-            this.gbxLift1Cntr.Location = new System.Drawing.Point(229, 133);
+            this.gbxLift1Cntr.Location = new System.Drawing.Point(229, 102);
             this.gbxLift1Cntr.Name = "gbxLift1Cntr";
-            this.gbxLift1Cntr.Size = new System.Drawing.Size(85, 165);
+            this.gbxLift1Cntr.Size = new System.Drawing.Size(85, 196);
             this.gbxLift1Cntr.TabIndex = 19;
             this.gbxLift1Cntr.TabStop = false;
             this.gbxLift1Cntr.Text = "Lift 1";
             // 
+            // lblFlrDisp1
+            // 
+            this.lblFlrDisp1.AutoSize = true;
+            this.lblFlrDisp1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFlrDisp1.Location = new System.Drawing.Point(34, 16);
+            this.lblFlrDisp1.Name = "lblFlrDisp1";
+            this.lblFlrDisp1.Size = new System.Drawing.Size(16, 16);
+            this.lblFlrDisp1.TabIndex = 32;
+            this.lblFlrDisp1.Text = "9";
+            // 
             // btnL1FG
             // 
             this.btnL1FG.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL1FG.Location = new System.Drawing.Point(5, 135);
+            this.btnL1FG.Location = new System.Drawing.Point(5, 166);
             this.btnL1FG.Name = "btnL1FG";
             this.btnL1FG.Size = new System.Drawing.Size(75, 23);
             this.btnL1FG.TabIndex = 4;
@@ -267,7 +281,7 @@
             // btnL1F1
             // 
             this.btnL1F1.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL1F1.Location = new System.Drawing.Point(5, 106);
+            this.btnL1F1.Location = new System.Drawing.Point(5, 137);
             this.btnL1F1.Name = "btnL1F1";
             this.btnL1F1.Size = new System.Drawing.Size(75, 23);
             this.btnL1F1.TabIndex = 3;
@@ -279,7 +293,7 @@
             // btnL1F2
             // 
             this.btnL1F2.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL1F2.Location = new System.Drawing.Point(5, 77);
+            this.btnL1F2.Location = new System.Drawing.Point(5, 108);
             this.btnL1F2.Name = "btnL1F2";
             this.btnL1F2.Size = new System.Drawing.Size(75, 23);
             this.btnL1F2.TabIndex = 2;
@@ -291,7 +305,7 @@
             // btnL1F3
             // 
             this.btnL1F3.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL1F3.Location = new System.Drawing.Point(5, 48);
+            this.btnL1F3.Location = new System.Drawing.Point(5, 79);
             this.btnL1F3.Name = "btnL1F3";
             this.btnL1F3.Size = new System.Drawing.Size(75, 23);
             this.btnL1F3.TabIndex = 1;
@@ -303,7 +317,7 @@
             // btnL1F4
             // 
             this.btnL1F4.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL1F4.Location = new System.Drawing.Point(5, 19);
+            this.btnL1F4.Location = new System.Drawing.Point(5, 50);
             this.btnL1F4.Name = "btnL1F4";
             this.btnL1F4.Size = new System.Drawing.Size(75, 23);
             this.btnL1F4.TabIndex = 0;
@@ -314,22 +328,33 @@
             // 
             // gbxLift2Cntr
             // 
+            this.gbxLift2Cntr.Controls.Add(this.lblFlrDisp2);
             this.gbxLift2Cntr.Controls.Add(this.btnL2FG);
             this.gbxLift2Cntr.Controls.Add(this.btnL2F1);
             this.gbxLift2Cntr.Controls.Add(this.btnL2F2);
             this.gbxLift2Cntr.Controls.Add(this.btnL2F3);
             this.gbxLift2Cntr.Controls.Add(this.btnL2F4);
-            this.gbxLift2Cntr.Location = new System.Drawing.Point(320, 133);
+            this.gbxLift2Cntr.Location = new System.Drawing.Point(320, 102);
             this.gbxLift2Cntr.Name = "gbxLift2Cntr";
-            this.gbxLift2Cntr.Size = new System.Drawing.Size(85, 165);
+            this.gbxLift2Cntr.Size = new System.Drawing.Size(85, 196);
             this.gbxLift2Cntr.TabIndex = 20;
             this.gbxLift2Cntr.TabStop = false;
             this.gbxLift2Cntr.Text = "Lift 2";
             // 
+            // lblFlrDisp2
+            // 
+            this.lblFlrDisp2.AutoSize = true;
+            this.lblFlrDisp2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFlrDisp2.Location = new System.Drawing.Point(34, 16);
+            this.lblFlrDisp2.Name = "lblFlrDisp2";
+            this.lblFlrDisp2.Size = new System.Drawing.Size(16, 16);
+            this.lblFlrDisp2.TabIndex = 33;
+            this.lblFlrDisp2.Text = "9";
+            // 
             // btnL2FG
             // 
             this.btnL2FG.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL2FG.Location = new System.Drawing.Point(4, 135);
+            this.btnL2FG.Location = new System.Drawing.Point(5, 166);
             this.btnL2FG.Name = "btnL2FG";
             this.btnL2FG.Size = new System.Drawing.Size(75, 23);
             this.btnL2FG.TabIndex = 4;
@@ -341,7 +366,7 @@
             // btnL2F1
             // 
             this.btnL2F1.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL2F1.Location = new System.Drawing.Point(4, 106);
+            this.btnL2F1.Location = new System.Drawing.Point(5, 137);
             this.btnL2F1.Name = "btnL2F1";
             this.btnL2F1.Size = new System.Drawing.Size(75, 23);
             this.btnL2F1.TabIndex = 3;
@@ -353,7 +378,7 @@
             // btnL2F2
             // 
             this.btnL2F2.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL2F2.Location = new System.Drawing.Point(4, 77);
+            this.btnL2F2.Location = new System.Drawing.Point(5, 108);
             this.btnL2F2.Name = "btnL2F2";
             this.btnL2F2.Size = new System.Drawing.Size(75, 23);
             this.btnL2F2.TabIndex = 2;
@@ -365,7 +390,7 @@
             // btnL2F3
             // 
             this.btnL2F3.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL2F3.Location = new System.Drawing.Point(4, 48);
+            this.btnL2F3.Location = new System.Drawing.Point(5, 79);
             this.btnL2F3.Name = "btnL2F3";
             this.btnL2F3.Size = new System.Drawing.Size(75, 23);
             this.btnL2F3.TabIndex = 1;
@@ -377,7 +402,7 @@
             // btnL2F4
             // 
             this.btnL2F4.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL2F4.Location = new System.Drawing.Point(4, 19);
+            this.btnL2F4.Location = new System.Drawing.Point(5, 50);
             this.btnL2F4.Name = "btnL2F4";
             this.btnL2F4.Size = new System.Drawing.Size(75, 23);
             this.btnL2F4.TabIndex = 0;
@@ -388,22 +413,33 @@
             // 
             // gbxLift3Cntr
             // 
+            this.gbxLift3Cntr.Controls.Add(this.lblFlrDisp3);
             this.gbxLift3Cntr.Controls.Add(this.btnL3FG);
             this.gbxLift3Cntr.Controls.Add(this.btnL3F1);
             this.gbxLift3Cntr.Controls.Add(this.btnL3F2);
             this.gbxLift3Cntr.Controls.Add(this.btnL3F3);
             this.gbxLift3Cntr.Controls.Add(this.btnL3F4);
-            this.gbxLift3Cntr.Location = new System.Drawing.Point(411, 133);
+            this.gbxLift3Cntr.Location = new System.Drawing.Point(411, 102);
             this.gbxLift3Cntr.Name = "gbxLift3Cntr";
-            this.gbxLift3Cntr.Size = new System.Drawing.Size(85, 165);
+            this.gbxLift3Cntr.Size = new System.Drawing.Size(85, 196);
             this.gbxLift3Cntr.TabIndex = 20;
             this.gbxLift3Cntr.TabStop = false;
             this.gbxLift3Cntr.Text = "Lift 3";
             // 
+            // lblFlrDisp3
+            // 
+            this.lblFlrDisp3.AutoSize = true;
+            this.lblFlrDisp3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFlrDisp3.Location = new System.Drawing.Point(34, 16);
+            this.lblFlrDisp3.Name = "lblFlrDisp3";
+            this.lblFlrDisp3.Size = new System.Drawing.Size(16, 16);
+            this.lblFlrDisp3.TabIndex = 34;
+            this.lblFlrDisp3.Text = "9";
+            // 
             // btnL3FG
             // 
             this.btnL3FG.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL3FG.Location = new System.Drawing.Point(5, 135);
+            this.btnL3FG.Location = new System.Drawing.Point(5, 166);
             this.btnL3FG.Name = "btnL3FG";
             this.btnL3FG.Size = new System.Drawing.Size(75, 23);
             this.btnL3FG.TabIndex = 4;
@@ -415,7 +451,7 @@
             // btnL3F1
             // 
             this.btnL3F1.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL3F1.Location = new System.Drawing.Point(5, 106);
+            this.btnL3F1.Location = new System.Drawing.Point(5, 137);
             this.btnL3F1.Name = "btnL3F1";
             this.btnL3F1.Size = new System.Drawing.Size(75, 23);
             this.btnL3F1.TabIndex = 3;
@@ -427,7 +463,7 @@
             // btnL3F2
             // 
             this.btnL3F2.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL3F2.Location = new System.Drawing.Point(5, 77);
+            this.btnL3F2.Location = new System.Drawing.Point(5, 108);
             this.btnL3F2.Name = "btnL3F2";
             this.btnL3F2.Size = new System.Drawing.Size(75, 23);
             this.btnL3F2.TabIndex = 2;
@@ -439,7 +475,7 @@
             // btnL3F3
             // 
             this.btnL3F3.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL3F3.Location = new System.Drawing.Point(5, 48);
+            this.btnL3F3.Location = new System.Drawing.Point(5, 79);
             this.btnL3F3.Name = "btnL3F3";
             this.btnL3F3.Size = new System.Drawing.Size(75, 23);
             this.btnL3F3.TabIndex = 1;
@@ -451,7 +487,7 @@
             // btnL3F4
             // 
             this.btnL3F4.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnL3F4.Location = new System.Drawing.Point(5, 19);
+            this.btnL3F4.Location = new System.Drawing.Point(5, 50);
             this.btnL3F4.Name = "btnL3F4";
             this.btnL3F4.Size = new System.Drawing.Size(75, 23);
             this.btnL3F4.TabIndex = 0;
@@ -565,6 +601,7 @@
             this.tbxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbxLog.Size = new System.Drawing.Size(213, 279);
             this.tbxLog.TabIndex = 30;
+            this.tbxLog.TextChanged += new System.EventHandler(this.tbxLog_TextChanged);
             // 
             // gbxGlobalControls
             // 
@@ -572,7 +609,7 @@
             this.gbxGlobalControls.Controls.Add(this.btnResetButtons);
             this.gbxGlobalControls.Controls.Add(this.btnToTop);
             this.gbxGlobalControls.Controls.Add(this.btnToBottom);
-            this.gbxGlobalControls.Location = new System.Drawing.Point(274, 30);
+            this.gbxGlobalControls.Location = new System.Drawing.Point(271, 12);
             this.gbxGlobalControls.Name = "gbxGlobalControls";
             this.gbxGlobalControls.Size = new System.Drawing.Size(192, 84);
             this.gbxGlobalControls.TabIndex = 31;
@@ -653,7 +690,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmLiftSim";
-            this.Text = "Lift Simulator";
+            this.Text = ":";
             this.Load += new System.EventHandler(this.frmLiftSim_Load);
             this.pnlLift1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLift1)).EndInit();
@@ -662,8 +699,11 @@
             this.pnlLift3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLift3)).EndInit();
             this.gbxLift1Cntr.ResumeLayout(false);
+            this.gbxLift1Cntr.PerformLayout();
             this.gbxLift2Cntr.ResumeLayout(false);
+            this.gbxLift2Cntr.PerformLayout();
             this.gbxLift3Cntr.ResumeLayout(false);
+            this.gbxLift3Cntr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx4Down)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Down)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx3Up)).EndInit();
@@ -728,6 +768,9 @@
         private System.Windows.Forms.Button btnToBottom;
         private System.Windows.Forms.Button btnResetAll;
         private System.Windows.Forms.Button btnResetButtons;
+        private System.Windows.Forms.Label lblFlrDisp1;
+        private System.Windows.Forms.Label lblFlrDisp2;
+        private System.Windows.Forms.Label lblFlrDisp3;
     }
 }
 
